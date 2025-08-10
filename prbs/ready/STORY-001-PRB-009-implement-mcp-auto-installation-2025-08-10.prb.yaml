@@ -1,0 +1,226 @@
+# Medium PRB Template - Standard Features
+# For moderate instruction complexity (6-15 points) - AI executes instantly
+# Provides complete instructions for multi-file features
+
+# ⚠️ CRITICAL: FOLLOW ALL SECTIONS - SKIP NOTHING
+# ⚠️ SETTINGS: git_privacy: true = NO AI mentions in commits
+# ⚠️ TEMPLATES: [DYNAMIC_*_PRACTICES] placeholders get filled with actual content
+
+id: "STORY-001-PRB-009-implement-mcp-auto-installation-2025-08-10"
+type: medium-prb
+complexity: standard
+priority: "HIGH"
+title: "Developer Implement automatic installation of MCPs"
+
+# MANDATORY: Complete Context Section
+complete_context:
+  project: |
+    # GEMINI.md
+
+    This file provides guidance to Gemini CLI when working with the Intelligent Gemini CLI system.
+
+    ## Project Overview
+
+    **Intelligent Gemini CLI** transforms Gemini CLI into an intelligent virtual development team with specialized roles, behavioral framework guidance, and PRB-driven execution. This is a port of Intelligent Claude Code adapted for Gemini CLI.
+  settings: |
+    {
+      "theme": "dark",
+      "thinkingBudget": 30000
+    }
+  git_privacy: "true"
+  branch_protection: "true"
+  default_branch: "main"
+  branch_strategy: "feature/"
+  scope: "Implement MCP auto-installation feature"
+  best_practices:
+    - "DYNAMIC_BEST_PRACTICES_1"
+    - "DYNAMIC_BEST_PRACTICES_2"
+    - "DYNAMIC_BEST_PRACTICES_3"
+  code_samples:
+    - search: "ansible playbook"
+    - reference: "ansible/install.yml"
+  external_docs:
+    - url: ""
+    - context7: ""
+
+# MANDATORY: Requirements Section
+requirements:
+  functional:
+    - "Define a mechanism to specify MCPs for automatic installation."
+    - "Update the Ansible playbook to install the defined MCPs."
+    - "Add the MCP configuration to ~/.gemini/settings.json."
+    - "The installation process must not install MCPs that already exist in the configuration."
+  processual:
+    - "Respect git_privacy setting for commit messages"
+    - "Follow branch protection strategy from config"
+    - "Use configured default branch for operations"
+    - "Apply configured branch naming strategy"
+  technical:
+    - "Write AI instructions in clear, simple language"
+    - "Use Ansible for playbook modifications"
+  constraints:
+    coding_style: "[DYNAMIC_CODING_PRACTICES]"
+    architecture: "[DYNAMIC_ARCHITECTURE_PRACTICES]"
+    infrastructure: "[DYNAMIC_OPERATIONS_PRACTICES]"
+    security: "[DYNAMIC_SECURITY_PRACTICES]"
+    quality: "[DYNAMIC_QUALITY_PRACTICES]"
+
+# Embedded learnings and best-practices (no runtime search needed)
+embedded_learnings:
+  primary_pattern: |
+    From: memory/installation/ansible-setup.md
+    ## Ansible Setup
+    [ONLY THIS SPECIFIC ENTRY - max 500 tokens]
+
+embedded_best_practices:
+  primary_pattern: |
+    From: memory/configuration/settings-json.md
+    ## settings.json structure
+    [ONLY THIS SPECIFIC ENTRY - max 500 tokens]
+
+# Execution plan with configurable behaviors
+execution_plan:
+  approach: |
+    1. Introduce a new file, `mcp-manifest.json`, to define the MCPs to be installed.
+    2. Modify the `ansible/install.yml` playbook to read this manifest.
+    3. The playbook will parse the `~/.gemini/settings.json` file, check for existing MCPs, and add the new ones.
+  behavioral_overrides:
+    error_handling: "Standard"
+    testing_approach: "Manual validation"
+    review_process: "Architect review"
+  steps:
+    - "Design the structure of mcp-manifest.json"
+    - "Implement the Ansible playbook modifications"
+    - "Test the installation process"
+    - "Integrate the changes into the main branch"
+
+# Instructions for what to create/modify
+what_to_do:
+  files_to_create:
+    - path: "mcp-manifest.json"
+      content: |
+        {
+          "mcpServers": {
+            "serverName": {
+              "command": "path/to/server",
+              "args": ["--arg1", "value1"],
+              "env": {
+                "API_KEY": "$MY_API_TOKEN"
+              },
+              "cwd": "./server-directory",
+              "timeout": 30000,
+              "trust": false
+            }
+          }
+        }
+  files_to_modify:
+    - path: "ansible/install.yml"
+      changes: "Add tasks to read mcp-manifest.json, read ~/.gemini/settings.json, and add new MCPs if they do not exist."
+
+how_to_validate:
+  technical:
+    - "Run the Ansible playbook and ensure it completes without errors."
+  functional:
+    - "Verify that the MCPs from mcp-manifest.json are added to ~/.gemini/settings.json."
+    - "Run the playbook again and verify that no duplicate MCP entries are created."
+
+# Expert to review the work
+expert_review:
+  reviewer: "@Architect"
+  focus_areas: ["Ansible playbook correctness", "JSON manipulation logic"]
+  max_cycles: 3
+
+# MANDATORY: Git Operations Section
+git_operations:
+  branch_strategy: "feature/"
+  branch_protection: "true"
+  branch_name: "feature/STORY-001-PRB-009-implement-mcp-auto-installation"
+  commit_format: "STORY-001-PRB-009: [DESCRIPTION]"
+  privacy_filter: "true"
+  default_branch: "main"
+  version_bump: "MINOR"
+
+# MANDATORY: Documentation Updates Section
+documentation_updates:
+  - file: "CHANGELOG.md"
+    action: "Update with PR description"
+  - file: "README.md"
+    action: "Update with information about the new MCP auto-installation feature."
+
+# MANDATORY: Knowledge Management Section
+knowledge_management:
+  structure: "memory/installation/mcp-auto-install.md"
+  storage: "version-controlled"
+  embedded_learnings: "pre_searched_patterns"
+  capture_patterns: "New process for defining and installing MCPs"
+  capture_insights: "How to use Ansible to manage JSON configuration files"
+  store_location: "memory/installation/mcp-auto-install.md"
+
+# MANDATORY: Review Process Section
+review_process:
+  type: "sme_review"
+  reviewer: "@Architect"
+  focus_areas: ["Ansible playbook correctness", "JSON manipulation logic"]
+  max_cycles: 3
+  checklist:
+    - "Configuration settings applied correctly"
+    - "Multi-file coordination successful"
+    - "Functional requirements met"
+    - "Technical constraints satisfied"
+
+# MANDATORY: Documentation Management Section
+documentation_management:
+  required_updates:
+    changelog:
+      file: "CHANGELOG.md"
+      entry_format: |
+        ## [VERSION] - DATE
+        ### Added
+        - MCP auto-installation feature
+      semantic_versioning: true
+      mandatory: true
+    readme:
+      file: "README.md"
+      update_required: "YES"
+      sections_affected: "Features, Usage"
+      user_impact: "Users can now automatically install MCPs with the project."
+    api_docs:
+      update_required: "NO"
+      files_affected: ""
+      breaking_changes: "NO"
+  release_management:
+    github_release: "YES_FOR_MINOR_BUMPS"
+    release_notes: "YES"
+    migration_guide: "NO"
+  validation_checklist:
+    - "CHANGELOG.md updated with feature/fix description"
+    - "Version bumped appropriately (patch/minor)"
+    - "README.md updated if user-facing changes"
+    - "API docs updated if applicable"
+    - "GitHub release created if minor version bump"
+
+# MANDATORY: Implementation Samples Section
+implementation_samples:
+  example_commit: "feat: Implement MCP auto-installation feature"
+  example_branch: "feature/STORY-001-PRB-009-implement-mcp-auto-installation"
+  example_scope: |
+    Files: ansible/install.yml, mcp-manifest.json
+    - Add tasks to Ansible playbook to read MCP manifest
+    - Add logic to check for existing MCPs in settings.json
+    - Add new MCPs to settings.json
+  execution_checklist: |
+    ☐ Complete Context Section - Settings, best practices, code samples loaded
+    ☐ Requirements Section - All functional/processual/technical requirements met
+    ☐ Git Operations Section - Branch created, commits with privacy_filter
+    ☐ Documentation Updates Section - CHANGELOG.md and affected files updated
+    ☐ Knowledge Management Section - Patterns captured + stored in memory/
+    ☐ Review Process Section - SME review completed with max 3 cycles
+    ☐ Documentation Management Section - CHANGELOG, README, docs updated + release if minor
+    ☐ Implementation Samples Section - Applied correctly with multi-file scope
+
+# Store new learnings in version control
+learning_capture:
+  patterns: "New process for defining and installing MCPs"
+  insights: "How to use Ansible to manage JSON configuration files"
+  store_location: "memory/installation/mcp-auto-install.md"
+  version_control: true

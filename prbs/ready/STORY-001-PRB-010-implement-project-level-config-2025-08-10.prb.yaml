@@ -1,0 +1,223 @@
+# Medium PRB Template - Standard Features
+# For moderate instruction complexity (6-15 points) - AI executes instantly
+# Provides complete instructions for multi-file features
+
+# ⚠️ CRITICAL: FOLLOW ALL SECTIONS - SKIP NOTHING
+# ⚠️ SETTINGS: git_privacy: true = NO AI mentions in commits
+# ⚠️ TEMPLATES: [DYNAMIC_*_PRACTICES] placeholders get filled with actual content
+
+id: "STORY-001-PRB-010-implement-project-level-config-2025-08-10"
+type: medium-prb
+complexity: standard
+priority: "HIGH"
+title: "Developer Implement project-level configuration system"
+
+# MANDATORY: Complete Context Section
+complete_context:
+  project: |
+    # GEMINI.md
+
+    This file provides guidance to Gemini CLI when working with the Intelligent Gemini CLI system.
+
+    ## Project Overview
+
+    **Intelligent Gemini CLI** transforms Gemini CLI into an intelligent virtual development team with specialized roles, behavioral framework guidance, and PRB-driven execution. This is a port of Intelligent Claude Code adapted for Gemini CLI.
+  settings: |
+    {
+      "theme": "dark",
+      "thinkingBudget": 30000
+    }
+  git_privacy: "true"
+  branch_protection: "true"
+  default_branch: "main"
+  branch_strategy: "feature/"
+  scope: "Implement project-level configuration in config.md"
+  best_practices:
+    - "DYNAMIC_BEST_PRACTICES_1"
+    - "DYNAMIC_BEST_PRACTICES_2"
+    - "DYNAMIC_BEST_PRACTICES_3"
+  code_samples:
+    - search: "config-loader.md"
+    - reference: "src/behaviors/config-loader.md"
+  external_docs:
+    - url: ""
+    - context7: ""
+
+# MANDATORY: Requirements Section
+requirements:
+  functional:
+    - "The system must save configuration settings to a `config.md` file in the project root directory."
+    - "The system must load settings from `<project-dir>/config.md` if it exists."
+    - "Project-level settings from `config.md` must override global settings."
+  processual:
+    - "Respect git_privacy setting for commit messages"
+    - "Follow branch protection strategy from config"
+    - "Use configured default branch for operations"
+    - "Apply configured branch naming strategy"
+  technical:
+    - "Write AI instructions in clear, simple language"
+    - "The `config.md` file should be in a markdown format."
+  constraints:
+    coding_style: "[DYNAMIC_CODING_PRACTICES]"
+    architecture: "[DYNAMIC_ARCHITECTURE_PRACTICES]"
+    infrastructure: "[DYNAMIC_OPERATIONS_PRACTICES]"
+    security: "[DYNAMIC_SECURITY_PRACTICES]"
+    quality: "[DYNAMIC_QUALITY_PRACTICES]"
+
+# Embedded learnings and best-practices (no runtime search needed)
+embedded_learnings:
+  primary_pattern: |
+    From: memory/configuration/settings-json.md
+    ## settings.json structure
+    [ONLY THIS SPECIFIC ENTRY - max 500 tokens]
+
+embedded_best_practices:
+  primary_pattern: |
+    From: src/behaviors/config-loader.md
+    ## Configuration Loading
+    [ONLY THIS SPECIFIC ENTRY - max 500 tokens]
+
+# Execution plan with configurable behaviors
+execution_plan:
+  approach: |
+    1. Modify the configuration loading logic in `src/behaviors/config-loader.md`.
+    2. The updated logic will check for the existence of `<project-dir>/config.md`.
+    3. If the file exists, it will be parsed and its settings will be merged with the global configuration, with project settings taking precedence.
+    4. A new command or mechanism will be implemented to write settings to `config.md`.
+  behavioral_overrides:
+    error_handling: "Standard"
+    testing_approach: "Manual validation"
+    review_process: "Architect review"
+  steps:
+    - "Design the format for storing settings in `config.md`."
+    - "Implement the logic to read and parse `config.md`."
+    - "Implement the logic to write settings to `config.md`."
+    - "Test the configuration override functionality."
+    - "Integrate the changes into the main branch."
+
+# Instructions for what to create/modify
+what_to_do:
+  files_to_create:
+    - path: "config.md"
+      content: |
+        # Project Configuration
+
+        ## Theme
+        theme: "dark"
+
+        ## Autonomy Level
+        autonomy_level: "L2"
+  files_to_modify:
+    - path: "src/behaviors/config-loader.md"
+      changes: "Update the configuration loading logic to read from `<project-dir>/config.md` and merge with global settings."
+    - path: "src/commands/icc-set-setting.toml (or similar)"
+      changes: "Create or modify a command to save settings to `config.md`."
+
+how_to_validate:
+  technical:
+    - "Verify that the system correctly parses the `config.md` file."
+  functional:
+    - "Create a `config.md` file with a setting (e.g., `theme: light`)."
+    - "Start the system and verify that the theme is set to light, overriding any global setting."
+    - "Use a command to change a setting and verify that it is saved correctly to `config.md`."
+
+# Expert to review the work
+expert_review:
+  reviewer: "@Architect"
+  focus_areas: ["Configuration loading logic", "Markdown parsing"]
+  max_cycles: 3
+
+# MANDATORY: Git Operations Section
+git_operations:
+  branch_strategy: "feature/"
+  branch_protection: "true"
+  branch_name: "feature/STORY-001-PRB-010-project-level-config"
+  commit_format: "STORY-001-PRB-010: [DESCRIPTION]"
+  privacy_filter: "true"
+  default_branch: "main"
+  version_bump: "MINOR"
+
+# MANDATORY: Documentation Updates Section
+documentation_updates:
+  - file: "CHANGELOG.md"
+    action: "Update with PR description"
+  - file: "README.md"
+    action: "Update with information about the new project-level configuration system."
+
+# MANDATORY: Knowledge Management Section
+knowledge_management:
+  structure: "memory/configuration/project-level-config.md"
+  storage: "version-controlled"
+  embedded_learnings: "pre_searched_patterns"
+  capture_patterns: "New process for project-level configuration"
+  capture_insights: "How to manage configuration hierarchy"
+  store_location: "memory/configuration/project-level-config.md"
+
+# MANDATORY: Review Process Section
+review_process:
+  type: "sme_review"
+  reviewer: "@Architect"
+  focus_areas: ["Configuration loading logic", "Markdown parsing"]
+  max_cycles: 3
+  checklist:
+    - "Configuration settings applied correctly"
+    - "Project-level settings override global settings"
+    - "Functional requirements met"
+    - "Technical constraints satisfied"
+
+# MANDATORY: Documentation Management Section
+documentation_management:
+  required_updates:
+    changelog:
+      file: "CHANGELOG.md"
+      entry_format: |
+        ## [VERSION] - DATE
+        ### Added
+        - Project-level configuration via `config.md`
+      semantic_versioning: true
+      mandatory: true
+    readme:
+      file: "README.md"
+      update_required: "YES"
+      sections_affected: "Configuration"
+      user_impact: "Users can now configure project-specific settings in `config.md`."
+    api_docs:
+      update_required: "NO"
+      files_affected: ""
+      breaking_changes: "NO"
+  release_management:
+    github_release: "YES_FOR_MINOR_BUMPS"
+    release_notes: "YES"
+    migration_guide: "NO"
+  validation_checklist:
+    - "CHANGELOG.md updated with feature/fix description"
+    - "Version bumped appropriately (patch/minor)"
+    - "README.md updated if user-facing changes"
+    - "API docs updated if applicable"
+    - "GitHub release created if minor version bump"
+
+# MANDATORY: Implementation Samples Section
+implementation_samples:
+  example_commit: "feat: Implement project-level configuration"
+  example_branch: "feature/STORY-001-PRB-010-project-level-config"
+  example_scope: |
+    Files: src/behaviors/config-loader.md, src/commands/icc-set-setting.toml
+    - Modify config loader to read from `config.md`
+    - Implement logic to merge project and global settings
+    - Create/modify command to save settings to `config.md`
+  execution_checklist: |
+    ☐ Complete Context Section - Settings, best practices, code samples loaded
+    ☐ Requirements Section - All functional/processual/technical requirements met
+    ☐ Git Operations Section - Branch created, commits with privacy_filter
+    ☐ Documentation Updates Section - CHANGELOG.md and affected files updated
+    ☐ Knowledge Management Section - Patterns captured + stored in memory/
+    ☐ Review Process Section - SME review completed with max 3 cycles
+    ☐ Documentation Management Section - CHANGELOG, README, docs updated + release if minor
+    ☐ Implementation Samples Section - Applied correctly with multi-file scope
+
+# Store new learnings in version control
+learning_capture:
+  patterns: "New process for project-level configuration"
+  insights: "How to manage configuration hierarchy"
+  store_location: "memory/configuration/project-level-config.md"
+  version_control: true
