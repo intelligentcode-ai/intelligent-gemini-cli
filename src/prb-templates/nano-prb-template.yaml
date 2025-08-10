@@ -12,20 +12,18 @@ title: "[AUTO-ROLE] [DESCRIPTION]"
 
 # MANDATORY: Complete Context Section
 complete_context:
-  project: "[CLAUDE.md]"        # Project context from CLAUDE.md
-  settings: "[ALL-SETTINGS]"   # All configuration values
-  git_privacy: "[FROM_CONFIG]" # git_privacy setting from config
-  branch_protection: "[FROM_CONFIG]" # branch_protection from config
-  default_branch: "[FROM_CONFIG]"    # default_branch from config
-  branch_strategy: "[FROM_CONFIG]"   # branch_prefixes from config
-  best_practices:
-    # Minimal best-practices for trivial changes (optional)
-    - "[DYNAMIC_BEST_PRACTICES_1]"
+  project: "Dynamically injected project context from GEMINI.md."
+  settings: "Dynamically injected all configuration values."
+  git_privacy: "Dynamically injected git_privacy setting from config."
+  branch_protection: "Dynamically injected branch_protection from config."
+  default_branch: "Dynamically injected default_branch from config."
+  branch_strategy: "Dynamically injected branch_prefixes from config."
+  best_practices: [] # Dynamically injected relevant best practices (minimal for trivial changes).
 
 # MANDATORY: Requirements Section
 requirements:
   functional:
-    - "[SPECIFIC_CHANGE_NEEDED]"
+    - "Describe the specific, single change needed (e.g., 'Fix typo in README.md')."
   processual:
     - "Respect git_privacy setting for commit messages"
     - "Follow branch protection if enabled"
@@ -33,28 +31,28 @@ requirements:
 
 # What to do - simple and direct
 what_to_do:
-  action: "[SPECIFIC_CHANGE]"
-  file: "[FILE_PATH]"
-  line: "[LINE_NUMBER]" # Optional
+  action: "Describe the specific action (e.g., 'Replace text', 'Add line')."
+  file: "Specify the path to the file (e.g., README.md)."
+  line: "Specify the line number (optional, e.g., 15)." # Optional
   
 how_to_check:
-  - "[SIMPLE_CHECK]"
+  - "Describe a simple check to verify the change (e.g., 'Verify text is updated in file')."
 
 # MANDATORY: Git Operations Section  
 # ⚠️ git_privacy: true = NO "Generated with Claude Code", NO "Co-Authored-By: Claude"
 git_operations:
-  branch_strategy: "[FROM_CONFIG]"     # Use configured branch strategy
-  branch_protection: "[FROM_CONFIG]"  # Respect branch protection setting
-  commit_format: "[ID]: [DESCRIPTION]"
-  privacy_filter: "[FROM_CONFIG]"     # Apply git_privacy if enabled - CRITICAL!
-  default_branch: "[FROM_CONFIG]"     # Target configured default branch
-  version_bump: "[NONE|PATCH]"        # PATCH for fixes, NONE for trivial
+  branch_strategy: "Dynamically injected from config (e.g., 'feature/')."
+  branch_protection: "Dynamically injected from config (e.g., 'true')."
+  commit_format: "Dynamically generated (e.g., 'NANO-001: Fix typo')."
+  privacy_filter: "Dynamically injected from config (e.g., 'true')."
+  default_branch: "Dynamically injected from config (e.g., 'main')."
+  version_bump: "Specify 'NONE' for trivial changes, 'PATCH' for bug fixes."
 
 # MANDATORY: Knowledge Management Section
 knowledge_management:
-  structure: "memory/[topic]/[subtopic].md"
-  storage: "version-controlled"
-  capture: "not_needed_for_trivial"
+  structure: "memory/[topic]/[subtopic].md" # Example: memory/fix/typo-fix.md
+  storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
+  capture: "Not typically needed for trivial changes, but can be used for insights."
 
 # MANDATORY: Review Process Section
 review_process:
@@ -68,18 +66,18 @@ documentation_management:
       file: "CHANGELOG.md"
       entry_format: |
         ### Fixed
-        - [NANO_CHANGE_DESCRIPTION]
+        - Describe the nano change (e.g., 'Fixed typo in README.md').
       semantic_versioning: true
       mandatory: true
       
     readme:
       file: "README.md"  
-      update_required: "[YES_IF_DOCS_CHANGED]"
-      sections_affected: "[NONE_USUALLY]"
+      update_required: "NO" # Set to YES if user-facing documentation is changed.
+      sections_affected: "List affected sections (usually 'NONE' for nano changes)."
       
   release_management:
-    github_release: "NO"     # Patch bumps don't need releases
-    release_notes: "NO"      # Trivial changes documented in CHANGELOG only
+    github_release: "NO"     # Patch bumps don't need releases.
+    release_notes: "NO"      # Trivial changes documented in CHANGELOG only.
     
   validation_checklist:
     - "CHANGELOG.md updated with fix entry"
@@ -88,8 +86,8 @@ documentation_management:
 # MANDATORY: Implementation Samples Section
 # ⚠️ EXECUTION CHECKLIST: All 6 sections must be completed
 implementation_samples:
-  example_commit: "[NANO-001]: Fix typo in README.md"
-  example_change: "Line 15: 'documnetation' → 'documentation'"
+  example_commit: "Example commit message for this PRB type."
+  example_change: "Describe the specific change (e.g., 'Line 15: 'old' -> 'new'')."
   
   execution_checklist: |
     ☐ Complete Context Section - Settings loaded and applied

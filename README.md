@@ -20,6 +20,41 @@ This will:
 3. Configure settings.json
 4. Initialize memory system
 
+### MCP Auto-Installation
+
+The Intelligent Gemini CLI supports automatic installation of Multi-Context Prompts (MCPs) defined in `mcp-manifest.json` at the project root. These MCPs are automatically added to your `~/.gemini/settings.json` file during installation.
+
+To define MCPs for auto-installation, create an `mcp-manifest.json` file in your project's root directory with the following structure:
+
+```json
+{
+  "mcpServers": {
+    "serverName": {
+      "command": "path/to/server",
+      "args": ["--arg1", "value1"],
+      "env": {
+        "API_KEY": "$MY_API_TOKEN"
+      },
+      "cwd": "./server-directory",
+      "timeout": 30000,
+      "trust": false
+    }
+  }
+}
+```
+
+During the installation process (`make install`), the system will check for existing MCPs in `~/.gemini/settings.json` and only install new ones, ensuring idempotency.
+
+### Makefile Parameters for Installation
+
+The `make install` command supports the following optional parameters:
+
+*   `MCP_CONFIG_PATH`: Specifies an external path to a JSON file containing Model Context Protocol (MCP) server configurations for auto-installation. If provided, this file will be used instead of the default `mcp-manifest.json` in the project root.
+    **Usage:** `make install MCP_CONFIG_PATH=/path/to/your/mcp-config.json`
+
+*   `API_KEYS_FILE`: Specifies a path to a file containing API keys (e.g., `KEY=VALUE` pairs, one per line) that should be substituted into the installed `settings.json` file. This allows for secure handling of sensitive credentials.
+    **Usage:** `make install API_KEYS_FILE=/path/to/your/api-keys.env`
+
 ### Uninstall
 ```bash
 # Conservative (preserves user data)

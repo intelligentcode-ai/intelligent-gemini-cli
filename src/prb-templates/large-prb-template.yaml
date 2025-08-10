@@ -15,27 +15,22 @@ requires_decomposition: true
 
 # MANDATORY: Complete Context Section
 complete_context:
-  project: "[CLAUDE.md]"        # Project context from CLAUDE.md
-  settings: "[ALL-SETTINGS]"   # All configuration values
-  git_privacy: "[FROM_CONFIG]" # git_privacy setting from config
-  branch_protection: "[FROM_CONFIG]" # branch_protection from config
-  default_branch: "[FROM_CONFIG]"    # default_branch from config
-  branch_strategy: "[FROM_CONFIG]"   # branch_prefixes from config
-  business_goal: "[BUSINESS_OBJECTIVE]"
-  technical_scope: "[SYSTEM_COMPONENTS]"
-  best_practices:
-    # Auto-discovered practices from best-practices/ directory
-    # Top 3 relevant practices for complex features
-    - "[DYNAMIC_BEST_PRACTICES_1]"
-    - "[DYNAMIC_BEST_PRACTICES_2]"
-    - "[DYNAMIC_BEST_PRACTICES_3]"
+  project: "Dynamically injected project context from GEMINI.md."
+  settings: "Dynamically injected all configuration values."
+  git_privacy: "Dynamically injected git_privacy setting from config."
+  branch_protection: "Dynamically injected branch_protection from config."
+  default_branch: "Dynamically injected default_branch from config."
+  branch_strategy: "Dynamically injected branch_prefixes from config."
+  business_goal: "Describe the overarching business objective this large feature addresses."
+  technical_scope: "Outline the system components or areas affected by this feature."
+  best_practices: [] # Dynamically injected relevant best practices.
   
 # MANDATORY: Requirements Section
 requirements:
   functional:
-    - "[COMPLEX_REQUIREMENT_1]"
-    - "[COMPLEX_REQUIREMENT_2]"
-    - "[COMPLEX_REQUIREMENT_3]"
+    - "Describe the high-level functional requirements for this large feature."
+    - "Break down complex user stories into manageable functional components."
+    - "Specify expected system behaviors and interactions."
   processual:
     - "Respect git_privacy setting for all sub-PRB commits"
     - "Follow branch protection strategy across all components"
@@ -50,175 +45,161 @@ requirements:
 # Automatic sub-PRB generation
 sub_prbs:
   # ALL SUB-PRBS INHERIT COMPLETE CONTEXT AND MANDATORY SECTIONS
-  - id: "[MEDIUM-001]"
-    title: "[ROLE] [COMPONENT_1]"
+  - id: "Dynamically generated ID (e.g., MEDIUM-001)."
+    title: "Describe the role and component (e.g., @Developer Implement User Authentication)."
     complexity: medium
-    dependencies: []
+    dependencies: [] # List any dependencies on other sub-PRBs.
     complete_context:
       inherit_all: true  # Inherits ALL parent context
-      project: "[CLAUDE.md]"
-      settings: "[ALL-SETTINGS]"
-      git_privacy: "[FROM_CONFIG]"
-      branch_protection: "[FROM_CONFIG]"
-      default_branch: "[FROM_CONFIG]"
-      branch_strategy: "[FROM_CONFIG]"
+      # No need to specify project, settings, git_privacy, etc. here if inherit_all is true.
     requirements:
-      functional: ["[COMPONENT_1_REQUIREMENTS]"]
+      functional: ["Describe functional requirements for this sub-component."]
       processual: 
         - "Respect git_privacy setting for commit messages"
         - "Follow branch protection strategy from config"
         - "Use configured default branch for operations"
         - "Apply configured branch naming strategy"
-      technical: ["[COMPONENT_1_TECH_SPECS]"]
+      technical: ["Specify technical details for this sub-component."]
     git_operations:
-      branch_strategy: "[FROM_CONFIG]"
-      branch_protection: "[FROM_CONFIG]"
-      privacy_filter: "[FROM_CONFIG]"
-      default_branch: "[FROM_CONFIG]"
+      branch_strategy: "Dynamically inherited from parent PRB."
+      branch_protection: "Dynamically inherited from parent PRB."
+      privacy_filter: "Dynamically inherited from parent PRB."
+      default_branch: "Dynamically inherited from parent PRB."
     knowledge_management:
-      structure: "memory/[topic]/[subtopic].md"
-      storage: "version-controlled"
+      structure: "memory/[topic]/[subtopic].md" # Example: memory/auth/user-auth.md
+      storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
     review_process:
       type: "sme_review"
       inherit_from_parent: true
     implementation_samples:
-      example_commit: "[MEDIUM-001]: [COMPONENT_1_DESCRIPTION]"
+      example_commit: "Example commit message for this sub-PRB."
     
-  - id: "[MEDIUM-002]"
-    title: "[ROLE] [COMPONENT_2]"
+  - id: "Dynamically generated ID (e.g., MEDIUM-002)."
+    title: "Describe the role and component (e.g., @Developer Implement User Profile Management)."
     complexity: medium
-    dependencies: ["[MEDIUM-001]"]
+    dependencies: ["Dynamically generated ID (e.g., MEDIUM-001)."] # List any dependencies on other sub-PRBs.
     complete_context:
       inherit_all: true  # Inherits ALL parent context
-      project: "[CLAUDE.md]"
-      settings: "[ALL-SETTINGS]"
-      git_privacy: "[FROM_CONFIG]"
-      branch_protection: "[FROM_CONFIG]"
-      default_branch: "[FROM_CONFIG]"
-      branch_strategy: "[FROM_CONFIG]"
+      # No need to specify project, settings, git_privacy, etc. here if inherit_all is true.
     requirements:
-      functional: ["[COMPONENT_2_REQUIREMENTS]"]
+      functional: ["Describe functional requirements for this sub-component."]
       processual:
         - "Respect git_privacy setting for commit messages"
         - "Follow branch protection strategy from config"
         - "Use configured default branch for operations"
         - "Apply configured branch naming strategy"
-      technical: ["[COMPONENT_2_TECH_SPECS]"]
+      technical: ["Specify technical details for this sub-component."]
     git_operations:
-      branch_strategy: "[FROM_CONFIG]"
-      branch_protection: "[FROM_CONFIG]"
-      privacy_filter: "[FROM_CONFIG]"
-      default_branch: "[FROM_CONFIG]"
+      branch_strategy: "Dynamically inherited from parent PRB."
+      branch_protection: "Dynamically inherited from parent PRB."
+      privacy_filter: "Dynamically inherited from parent PRB."
+      default_branch: "Dynamically inherited from parent PRB."
     knowledge_management:
-      structure: "memory/[topic]/[subtopic].md"
-      storage: "version-controlled"
+      structure: "memory/[topic]/[subtopic].md" # Example: memory/user/profile-management.md
+      storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
     review_process:
       type: "sme_review"
       inherit_from_parent: true
     implementation_samples:
-      example_commit: "[MEDIUM-002]: [COMPONENT_2_DESCRIPTION]"
+      example_commit: "Example commit message for this sub-PRB."
     
-  - id: "[TINY-001]"
-    title: "[ROLE] [CONFIG_TASK]"
+  - id: "Dynamically generated ID (e.g., TINY-001)."
+    title: "Describe the role and task (e.g., @Developer Update Configuration)."
     complexity: tiny
-    dependencies: []
+    dependencies: [] # List any dependencies on other sub-PRBs.
     complete_context:
       inherit_all: true  # Inherits ALL parent context
-      project: "[CLAUDE.md]"
-      settings: "[ALL-SETTINGS]"
-      git_privacy: "[FROM_CONFIG]"
-      branch_protection: "[FROM_CONFIG]"
-      default_branch: "[FROM_CONFIG]"
-      branch_strategy: "[FROM_CONFIG]"
+      # No need to specify project, settings, git_privacy, etc. here if inherit_all is true.
     requirements:
-      functional: ["[CONFIG_REQUIREMENTS]"]
+      functional: ["Describe functional requirements for this configuration task."]
       processual:
         - "Respect git_privacy setting for commit messages"
         - "Follow branch protection strategy from config"
         - "Use configured default branch for operations"
         - "Apply configured branch naming strategy"
-      technical: ["[CONFIG_TECH_SPECS]"]
+      technical: ["Specify technical details for this configuration task."]
     git_operations:
-      branch_strategy: "[FROM_CONFIG]"
-      branch_protection: "[FROM_CONFIG]"
-      privacy_filter: "[FROM_CONFIG]"
-      default_branch: "[FROM_CONFIG]"
+      branch_strategy: "Dynamically inherited from parent PRB."
+      branch_protection: "Dynamically inherited from parent PRB."
+      privacy_filter: "Dynamically inherited from parent PRB."
+      default_branch: "Dynamically inherited from parent PRB."
     knowledge_management:
-      structure: "memory/[topic]/[subtopic].md"
-      storage: "version-controlled"
+      structure: "memory/[topic]/[subtopic].md" # Example: memory/config/settings-update.md
+      storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
     review_process:
       type: "minimal_self_review"
       inherit_from_parent: true
     implementation_samples:
-      example_commit: "[TINY-001]: [CONFIG_DESCRIPTION]"
+      example_commit: "Example commit message for this sub-PRB."
     
 # Coordination strategy
 execution_strategy:
   parallel_groups:
-    - ["[MEDIUM-001]", "[TINY-001]"] # Can run together
-    - ["[MEDIUM-002]"]               # Depends on group 1
+    - "List groups of sub-PRBs that can run in parallel (e.g., [\"SUB-PRB-A\", \"SUB-PRB-B\"])."
+    - "Define dependencies between parallel groups."
     
   integration_points:
-    - between: ["[MEDIUM-001]", "[MEDIUM-002]"]
-      validate: "[API_CONTRACT]"
+    - between: "Specify sub-PRBs that have integration points (e.g., [\"SUB-PRB-A\", \"SUB-PRB-B\"])."
+      validate: "Describe the validation required at this integration point (e.g., API contract, data consistency)."
+
       
 # Sequential thinking for complex decisions
 sequential_thinking:
   required: true
   command: "/icc-think-sequential"
   focus_areas:
-    - "[ARCHITECTURE_DECISIONS]"
-    - "[INTEGRATION_APPROACH]"
-    - "[RISK_ASSESSMENT]"
+    - "Key architectural decisions to be made."
+    - "Approach for integrating different components or systems."
+    - "Identification and assessment of potential risks."
     
 # Multiple validation gates
 validation_gates:
-  - after: "[MEDIUM-001]"
-    check: "[SECURITY_REVIEW]"
-    reviewer: "@Security-Engineer"
+  - after: "Specify when this gate should be triggered (e.g., after: \"SUB-PRB-ID\")."
+    check: "Describe the validation check (e.g., \"Code audit\")."
+    reviewer: "Dynamically assigned _SPECIALIST_-SME (e.g., @Security-Engineer)."
     
   - after: "all_complete"
-    check: "[INTEGRATION_TEST]"
-    reviewer: "@QA-Engineer"
+    check: "Describe the final validation check (e.g., \"End-to-end integration test\")."
+    reviewer: "Dynamically assigned _SPECIALIST_-SME (e.g., @QA-Engineer)."
     
 # MANDATORY: Git Operations Section
 # ⚠️ git_privacy: true = NO "Generated with Claude Code", NO "Co-Authored-By: Claude"
 # ⚠️ SUB-PRB COORDINATION: All sub-PRBs must follow same git privacy settings
 git_operations:
-  branch_strategy: "[FROM_CONFIG]"     # Use configured branch prefixes
-  branch_protection: "[FROM_CONFIG]"  # Respect branch protection setting
-  branch_name: "[FROM_CONFIG_PREFIX]/[STORY-ID]-[DESCRIPTION]"
-  commit_coordination: "sub_prb_aware"
-  privacy_filter: "[FROM_CONFIG]"     # Apply git_privacy across all sub-PRBs - CRITICAL!
-  default_branch: "[FROM_CONFIG]"     # Target configured default branch
-  version_bump: "[MINOR|MAJOR]"       # MINOR for features, MAJOR for breaking changes
+  branch_strategy: "Dynamically injected from config (e.g., 'feature/')."
+  branch_protection: "Dynamically injected from config (e.g., 'true')."
+  branch_name: "Dynamically generated (e.g., 'feature/STORY-001-implement-feature')."
+  commit_coordination: "sub_prb_aware" # Indicates that commits are coordinated across sub-PRBs.
+  privacy_filter: "Dynamically injected from config (e.g., 'true')."
+  default_branch: "Dynamically injected from config (e.g., 'main')."
+  version_bump: "Specify 'MINOR' for features, 'MAJOR' for breaking changes."
   merge_request: true # Parent asks user
   squash_commits: true
 
 # MANDATORY: Knowledge Management Section
 knowledge_management:
-  structure: "memory/[topic]/[subtopic].md"
-  storage: "version-controlled"
-  complex_pattern_capture: true
-  sub_prb_learning_aggregation: true
+  structure: "memory/[topic]/[subtopic].md" # Example: memory/architecture/system-design.md
+  storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
+  complex_pattern_capture: true # Indicates that complex patterns are captured.
+  sub_prb_learning_aggregation: true # Indicates that learnings from sub-PRBs are aggregated.
   capture_points:
-    - "[ARCHITECTURE_PATTERNS]"
-    - "[INTEGRATION_APPROACHES]"
-    - "[COORDINATION_INSIGHTS]"
-  store_as: "ComplexPattern"
+    - "Describe key architectural patterns identified."
+    - "Outline approaches for integrating different components."
+    - "Summarize insights on coordinating sub-PRB execution."
+  store_as: "ComplexPattern" # Indicates the type of pattern being stored.
 
 # MANDATORY: Review Process Section
 review_process:
   type: "multi_gate_review"
   validation_gates:
-    - after: "[MEDIUM-001]"
-      check: "[SECURITY_REVIEW]"
-      reviewer: "@Security-Engineer"
+    - after: "Specify when this gate should be triggered (e.g., after: \"SUB-PRB-ID\")."
+      check: "Describe the validation check (e.g., \"Security review\", \"Code audit\")."
+      reviewer: "Dynamically assigned _SPECIALIST_-SME (e.g., @Security-Engineer)."
     - after: "all_complete"
-      check: "[INTEGRATION_TEST]"
-      reviewer: "@QA-Engineer"
-  coordination: "continuous"
-  escalation: "architect_consultation"
+      check: "Describe the final validation check (e.g., \"End-to-end integration test\")."
+      reviewer: "Dynamically assigned _SPECIALIST_-SME (e.g., @QA-Engineer)."
+  coordination: "continuous" # Describes how review coordination is handled.
+  escalation: "architect_consultation" # Describes the escalation process for review issues.
 
 # MANDATORY: Documentation Management Section
 documentation_management:
@@ -228,34 +209,34 @@ documentation_management:
       entry_format: |
         ## [VERSION] - DATE
         ### Added
-        - [LARGE_FEATURE_DESCRIPTION]
-        - [KEY_CAPABILITIES_ADDED]
+        - Describe the large feature.
+        - List key capabilities added.
         ### Changed
-        - [ARCHITECTURAL_CHANGES_IF_ANY]
+        - Describe architectural changes, if any.
       semantic_versioning: true
       mandatory: true
       
     readme:
       file: "README.md"  
-      update_required: "[YES_FOR_MAJOR_FEATURES]"
-      sections_affected: "[FEATURES/INSTALLATION/USAGE/ARCHITECTURE]"
-      user_impact: "[COMPREHENSIVE_DESCRIPTION]"
+      update_required: "YES" # Set to YES for major features.
+      sections_affected: "List affected sections (e.g., Features, Installation, Usage, Architecture)."
+      user_impact: "Provide a comprehensive description of the user impact."
       
     api_docs:
-      update_required: "[YES_IF_API_CHANGES]"
-      files_affected: "[docs/api/*.md_LIST]"
-      breaking_changes: "[YES/NO_WITH_DETAILS]"
+      update_required: "NO" # Set to YES if API changes are made.
+      files_affected: "List affected API documentation files (e.g., docs/api/auth.md)."
+      breaking_changes: "NO" # Set to YES/NO with details if breaking changes are introduced.
       
     user_guides:
-      update_required: "[YES_FOR_NEW_WORKFLOWS]"
-      guides_affected: "[docs/guides/*.md_LIST]"
-      new_features: "[FEATURE_DOCUMENTATION_NEEDS]"
+      update_required: "NO" # Set to YES for new workflows.
+      guides_affected: "List affected user guide files (e.g., docs/guides/new-workflow.md)."
+      new_features: "Describe new features requiring documentation."
     
   release_management:
     github_release: "YES"                    # Always for minor versions
     release_notes: "YES"                     # Comprehensive feature documentation
-    migration_guide: "[YES_IF_BREAKING]"     # Required for breaking changes
-    announcement: "[YES_FOR_MAJOR_FEATURES]" # Blog/announcement consideration
+    migration_guide: "NO"     # Set to YES if breaking changes require a migration guide.
+    announcement: "NO" # Set to YES for major features (e.g., Blog/announcement consideration).
     
   validation_checklist:
     - "CHANGELOG.md updated with comprehensive feature description"
@@ -269,15 +250,14 @@ documentation_management:
 # MANDATORY: Implementation Samples Section
 # ⚠️ EXECUTION CHECKLIST: All 6 sections + sub-PRB coordination must be completed
 implementation_samples:
-  example_commit: "[LARGE-001]: Implement complete user management system"
-  example_branch: "feature/LARGE-001-user-management"
+  example_commit: "Example commit message for this PRB type."
+  example_branch: "Example branch name for this PRB type."
   example_scope: |
+    Describe the scope of changes, including sub-PRBs and coordination (e.g.,
     Sub-PRBs:
-    - MEDIUM-001: User authentication module
-    - MEDIUM-002: User profile management
-    - TINY-001: Configuration updates
-    Complex coordination across 15+ files
-    Multiple service integration points
+    - SUB-PRB-ID: Description
+    - SUB-PRB-ID: Description
+    Complex coordination across multiple files and services).
 
   execution_checklist: |
     ☐ Complete Context Section - Settings and scope loaded for parent + all sub-PRBs
@@ -296,7 +276,7 @@ implementation_samples:
 # Complex learning capture
 learning_strategy:
   capture_points:
-    - "[ARCHITECTURE_PATTERNS]"
-    - "[INTEGRATION_APPROACHES]"
-    - "[COORDINATION_INSIGHTS]"
-  store_as: "ComplexPattern"
+    - "Describe key architectural patterns identified during the project."
+    - "Outline successful integration approaches used."
+    - "Summarize insights gained from coordinating sub-PRB execution."
+  store_as: "ComplexPattern" # Indicates the type of pattern being stored (e.g., ComplexPattern, ArchitecturalPattern).

@@ -15,31 +15,24 @@ requires_epic_decomposition: true
 
 # MANDATORY: Complete Context Section
 complete_context:
-  project: "[CLAUDE.md]"        # Project context from CLAUDE.md
-  settings: "[ALL-SETTINGS]"   # All configuration values
-  git_privacy: "[FROM_CONFIG]" # git_privacy setting from config
-  branch_protection: "[FROM_CONFIG]" # branch_protection from config
-  default_branch: "[FROM_CONFIG]"    # default_branch from config
-  branch_strategy: "[FROM_CONFIG]"   # branch_prefixes from config
-  business_driver: "[WHY_THIS_MATTERS]"
-  impact_scope: "[AFFECTED_SYSTEMS]"
-  risk_level: "[HIGH|CRITICAL]"
-  rollback_required: true
-  best_practices:
-    # Auto-discovered practices from best-practices/ directory
-    # Top 5 relevant practices for system-wide changes
-    - "[DYNAMIC_BEST_PRACTICES_1]"
-    - "[DYNAMIC_BEST_PRACTICES_2]"
-    - "[DYNAMIC_BEST_PRACTICES_3]"
-    - "[DYNAMIC_BEST_PRACTICES_4]"
-    - "[DYNAMIC_BEST_PRACTICES_5]"
+  project: "Dynamically injected project context from GEMINI.md."
+  settings: "Dynamically injected all configuration values."
+  git_privacy: "Dynamically injected git_privacy setting from config."
+  branch_protection: "Dynamically injected branch_protection from config."
+  default_branch: "Dynamically injected default_branch from config."
+  branch_strategy: "Dynamically injected branch_prefixes from config."
+  business_driver: "Describe the core business reason or problem this system-wide change addresses."
+  impact_scope: "Outline all affected systems, modules, or teams."
+  risk_level: "Assess the risk level (e.g., HIGH, CRITICAL) for this system-wide change."
+  rollback_required: true # Indicates if a rollback plan is mandatory.
+  best_practices: [] # Dynamically injected relevant best practices.
   
 # MANDATORY: Requirements Section
 requirements:
   functional:
-    - "[SYSTEM_WIDE_REQUIREMENT_1]"
-    - "[SYSTEM_WIDE_REQUIREMENT_2]"
-    - "[SYSTEM_WIDE_REQUIREMENT_3]"
+    - "Describe the high-level functional requirements for this system-wide change."
+    - "Break down complex system-wide goals into functional components."
+    - "Specify expected system behaviors and interactions across all affected areas."
   processual:
     - "Respect git_privacy setting across all phases and sub-PRBs"
     - "Follow branch protection strategy for all components"
@@ -127,105 +120,90 @@ phases:
   - name: "Implementation"
     prbs:
       - type: large
-        title: "[MAJOR_COMPONENT_1]"
-        parallel_safe: true
+        title: "Describe the major component (e.g., Core API Module)."
+        parallel_safe: true # Indicates if this PRB can be executed in parallel with others.
         complete_context:
           inherit_all: true  # Inherits ALL parent context
-          project: "[CLAUDE.md]"
-          settings: "[ALL-SETTINGS]"
-          git_privacy: "[FROM_CONFIG]"
-          branch_protection: "[FROM_CONFIG]"
-          default_branch: "[FROM_CONFIG]"
-          branch_strategy: "[FROM_CONFIG]"
+          # No need to specify project, settings, git_privacy, etc. here if inherit_all is true.
         requirements:
-          functional: ["[COMPONENT_1_REQUIREMENTS]"]
+          functional: ["Describe functional requirements for this component."]
           processual:
             - "Respect git_privacy setting for implementation commits"
             - "Follow branch protection strategy for component development"
             - "Use configured default branch for component integration"
             - "Apply configured branch naming for implementation work"
-          technical: ["[COMPONENT_1_TECH_SPECS]"]
+          technical: ["Specify technical details for this component."]
         git_operations:
-          branch_strategy: "[FROM_CONFIG]"
-          branch_protection: "[FROM_CONFIG]"
-          privacy_filter: "[FROM_CONFIG]"
-          default_branch: "[FROM_CONFIG]"
+          branch_strategy: "Dynamically inherited from parent PRB."
+          branch_protection: "Dynamically inherited from parent PRB."
+          privacy_filter: "Dynamically inherited from parent PRB."
+          default_branch: "Dynamically inherited from parent PRB."
         knowledge_management:
-          structure: "memory/[topic]/[subtopic].md"
-          storage: "version-controlled"
+          structure: "memory/[topic]/[subtopic].md" # Example: memory/implementation/core-api.md
+          storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
         review_process:
           type: "implementation_review"
           inherit_from_parent: true
         implementation_samples:
-          example_scope: "Major component with 4+ Medium sub-PRBs"
+          example_scope: "Major component with multiple Medium sub-PRBs."
         
       - type: large  
-        title: "[MAJOR_COMPONENT_2]"
+        title: "Describe another major component (e.g., Data Processing Service)."
         parallel_safe: true
         complete_context:
           inherit_all: true  # Inherits ALL parent context
-          project: "[CLAUDE.md]"
-          settings: "[ALL-SETTINGS]"
-          git_privacy: "[FROM_CONFIG]"
-          branch_protection: "[FROM_CONFIG]"
-          default_branch: "[FROM_CONFIG]"
-          branch_strategy: "[FROM_CONFIG]"
+          # No need to specify project, settings, git_privacy, etc. here if inherit_all is true.
         requirements:
-          functional: ["[COMPONENT_2_REQUIREMENTS]"]
+          functional: ["Describe functional requirements for this component."]
           processual:
             - "Respect git_privacy setting for implementation commits"
             - "Follow branch protection strategy for component development"
             - "Use configured default branch for component integration"
             - "Apply configured branch naming for implementation work"
-          technical: ["[COMPONENT_2_TECH_SPECS]"]
+          technical: ["Specify technical details for this component."]
         git_operations:
-          branch_strategy: "[FROM_CONFIG]"
-          branch_protection: "[FROM_CONFIG]"
-          privacy_filter: "[FROM_CONFIG]"
-          default_branch: "[FROM_CONFIG]"
+          branch_strategy: "Dynamically inherited from parent PRB."
+          branch_protection: "Dynamically inherited from parent PRB."
+          privacy_filter: "Dynamically inherited from parent PRB."
+          default_branch: "Dynamically inherited from parent PRB."
         knowledge_management:
-          structure: "memory/[topic]/[subtopic].md"
-          storage: "version-controlled"
+          structure: "memory/[topic]/[subtopic].md" # Example: memory/implementation/data-processing.md
+          storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
         review_process:
           type: "implementation_review"
           inherit_from_parent: true
         implementation_samples:
-          example_scope: "Major component with 4+ Medium sub-PRBs"
+          example_scope: "Major component with multiple Medium sub-PRBs."
         
   - name: "Migration & Validation"
     prbs:
       - type: large
         title: "Data migration strategy"
-        critical_path: true
+        critical_path: true # Indicates if this PRB is on the critical path for the overall project.
         complete_context:
           inherit_all: true  # Inherits ALL parent context
-          project: "[CLAUDE.md]"
-          settings: "[ALL-SETTINGS]"
-          git_privacy: "[FROM_CONFIG]"
-          branch_protection: "[FROM_CONFIG]"
-          default_branch: "[FROM_CONFIG]"
-          branch_strategy: "[FROM_CONFIG]"
+          # No need to specify project, settings, git_privacy, etc. here if inherit_all is true.
         requirements:
-          functional: ["[MIGRATION_REQUIREMENTS]"]
+          functional: ["Describe functional requirements for data migration."]
           processual:
             - "Respect git_privacy setting for migration scripts"
             - "Follow branch protection strategy for migration work"
             - "Use configured default branch for migration integration"
             - "Apply configured branch naming for migration branches"
-          technical: ["[DATA_MIGRATION_TECH_SPECS]"]
+          technical: ["Specify technical details for data migration."]
         git_operations:
-          branch_strategy: "[FROM_CONFIG]"
-          branch_protection: "[FROM_CONFIG]"
-          privacy_filter: "[FROM_CONFIG]"
-          default_branch: "[FROM_CONFIG]"
+          branch_strategy: "Dynamically inherited from parent PRB."
+          branch_protection: "Dynamically inherited from parent PRB."
+          privacy_filter: "Dynamically inherited from parent PRB."
+          default_branch: "Dynamically inherited from parent PRB."
         knowledge_management:
-          structure: "memory/[topic]/[subtopic].md"
-          storage: "version-controlled"
+          structure: "memory/[topic]/[subtopic].md" # Example: memory/migration/data-strategy.md
+          storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
         review_process:
           type: "migration_review"
           inherit_from_parent: true
         implementation_samples:
-          example_scope: "Data migration with 3+ Medium sub-PRBs"
+          example_scope: "Data migration with multiple Medium sub-PRBs."
         
 # Ultra thinking mandatory
 ultra_thinking:
@@ -233,10 +211,10 @@ ultra_thinking:
   command: "/icc-think-sequential"
   depth: "maximum"
   considerations:
-    - "[SYSTEM_BOUNDARIES]"
-    - "[PERFORMANCE_IMPACT]"
-    - "[BACKWARDS_COMPATIBILITY]"
-    - "[FAILURE_SCENARIOS]"
+    - "Define the boundaries of the system being affected."
+    - "Assess the performance impact of the changes."
+    - "Ensure backwards compatibility with existing systems."
+    - "Identify and plan for potential failure scenarios."
     
 # Multi-role collaboration
 collaboration_model:
@@ -245,59 +223,54 @@ collaboration_model:
     architect: "@AI-Architect"
     tech_lead: "@System-Engineer"
     
-  specialist_pool:
-    - "[DYNAMIC_SPECIALIST_1]"
-    - "[DYNAMIC_SPECIALIST_2]"
-    - "[DYNAMIC_SPECIALIST_3]"
+  specialist_pool: [] # Dynamically assigned specialists based on project needs.
     
-  coordination: "continuous"
+  coordination: "continuous" # Describes how collaboration is coordinated.
   
 # System-wide validation
 validation_framework:
   checkpoints:
-    - "Architecture review after Phase 1"
-    - "Security audit after Phase 2"
-    - "Performance validation after Phase 3"
-    - "Full system test before deployment"
+    - "Describe the validation checkpoint (e.g., 'Architecture review after Phase 1')."
+    - "Specify the type of check (e.g., 'Security audit', 'Performance validation')."
+    - "Indicate when the checkpoint occurs (e.g., 'after Phase 2', 'before deployment')."
     
 # MANDATORY: Git Operations Section
 # ⚠️ git_privacy: true = NO "Generated with Claude Code", NO "Co-Authored-By: Claude"
 # ⚠️ CASCADING PRIVACY: All Large sub-PRBs must follow same git privacy settings
 git_operations:
-  branch_strategy: "[FROM_CONFIG]"     # Use configured branch prefixes
-  branch_protection: "[FROM_CONFIG]"  # Respect branch protection setting
-  branch_coordination: "feature-branch-per-phase"
-  integration_strategy: "progressive-merge"
-  privacy_filter: "[FROM_CONFIG]"     # Apply git_privacy across all phases - CRITICAL!
-  default_branch: "[FROM_CONFIG]"     # Target configured default branch
-  version_bump: "[MAJOR]"             # System-wide changes require MAJOR version bump
-  main_protection: "mandatory"
+  branch_strategy: "Dynamically injected from config (e.g., 'feature/')."
+  branch_protection: "Dynamically injected from config (e.g., 'true')."
+  branch_coordination: "feature-branch-per-phase" # Describes how branching is coordinated across phases.
+  integration_strategy: "progressive-merge" # Describes the strategy for integrating changes.
+  privacy_filter: "Dynamically injected from config (e.g., 'true')."
+  default_branch: "Dynamically injected from config (e.g., 'main')."
+  version_bump: "Specify 'MAJOR' for system-wide changes."
+  main_protection: "mandatory" # Indicates if main branch protection is mandatory.
 
 # MANDATORY: Knowledge Management Section
 knowledge_management:
-  structure: "memory/[topic]/[subtopic].md"
-  storage: "version-controlled"
-  system_wide_capture: true
-  phase_learning_aggregation: true
+  structure: "memory/[topic]/[subtopic].md" # Example: memory/architecture/system-design.md
+  storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
+  system_wide_capture: true # Indicates that knowledge is captured across the entire system.
+  phase_learning_aggregation: true # Indicates that learnings are aggregated per phase.
   mandatory_documentation:
-    - "Architecture decisions"
-    - "Migration patterns"
-    - "Rollback procedures"
-  format: "ArchitecturalDecisionRecord"
+    - "List mandatory architectural decisions to be documented."
+    - "Outline patterns for data migration."
+    - "Describe procedures for system rollback."
+  format: "ArchitecturalDecisionRecord" # Specifies the format for architectural decisions.
 
 # MANDATORY: Review Process Section
 review_process:
   type: "multi_phase_governance"
   checkpoints:
-    - "Architecture review after Phase 1"
-    - "Security audit after Phase 2"
-    - "Performance validation after Phase 3"
-    - "Full system test before deployment"
+    - "Describe the review checkpoint (e.g., 'Architecture review after Phase 1')."
+    - "Specify the type of review (e.g., 'Security audit', 'Performance validation')."
+    - "Indicate when the review occurs (e.g., 'after Phase 2', 'before deployment')."
   leadership:
-    pm: "@PM"
-    architect: "@AI-Architect"
-    tech_lead: "@System-Engineer"
-  escalation: "executive_review"
+    pm: "@PM" # Project Manager for overall coordination.
+    architect: "@AI-Architect" # Architect for technical oversight.
+    tech_lead: "@System-Engineer" # Technical Lead for implementation guidance.
+  escalation: "executive_review" # Describes the escalation process for review issues.
 
 # MANDATORY: Documentation Management Section
 documentation_management:
@@ -396,9 +369,9 @@ implementation_samples:
     SKIP NOTHING. EXECUTE EVERYTHING. COORDINATE ALL PHASES AND SUB-PRBS. COMPLETE SYSTEM LIFECYCLE.
 
 # Comprehensive learning
-knowledge_capture:
+learning_strategy:
   mandatory_documentation:
-    - "Architecture decisions"
-    - "Migration patterns"
-    - "Rollback procedures"
-  format: "ArchitecturalDecisionRecord"
+    - "List mandatory architectural decisions to be documented."
+    - "Outline patterns for data migration."
+    - "Describe procedures for system rollback."
+  format: "ArchitecturalDecisionRecord" # Specifies the format for architectural decisions.
