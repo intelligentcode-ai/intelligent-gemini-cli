@@ -81,9 +81,8 @@ embedded_best_practices:
 # Execution plan with configurable behaviors
 execution_plan:
   approach: |
-    1. Introduce a new file, `mcp-manifest.json`, to define the MCPs to be installed.
-    2. Modify the `ansible/install.yml` playbook to read this manifest.
-    3. The playbook will parse the `~/.gemini/settings.json` file, check for existing MCPs, and add the new ones.
+    1. Modify the `ansible/install.yml` playbook to conditionally read `mcp-manifest.json`. If `mcp-manifest.json` is not present, the playbook should skip the MCP installation step.
+    2. The playbook will parse the `~/.gemini/settings.json` file, check for existing MCPs, and add the new ones from `mcp-manifest.json`.
   behavioral_overrides:
     error_handling: "Standard"
     testing_approach: "Manual validation"
@@ -99,7 +98,7 @@ what_to_do:
   
   files_to_modify:
     - path: "ansible/install.yml"
-      changes: "Add tasks to read mcp-manifest.json, read ~/.gemini/settings.json, and add new MCPs if they do not exist."
+      changes: "Add tasks to `ansible/install.yml` to check for the existence of `mcp-manifest.json`. If present, read it and add new MCPs to `~/.gemini/settings.json` if they do not exist. If `mcp-manifest.json` is not present, skip the MCP installation tasks."
 
 how_to_validate:
   technical:
@@ -134,7 +133,7 @@ documentation_updates:
 # MANDATORY: Knowledge Management Section
 knowledge_management:
   structure: "memory/installation/mcp-auto-install.md"
-  storage: "version-controlled"
+  storage: "not-version-controlled"
   embedded_learnings: "pre_searched_patterns"
   capture_patterns: "New process for defining and installing MCPs"
   capture_insights: "How to use Ansible to manage JSON configuration files"
@@ -207,4 +206,4 @@ learning_capture:
   patterns: "New process for defining and installing MCPs"
   insights: "How to use Ansible to manage JSON configuration files"
   store_location: "memory/installation/mcp-auto-install.md"
-  version_control: true
+  version_control: false

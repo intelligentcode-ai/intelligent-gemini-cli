@@ -1,6 +1,6 @@
 # MCP Server Configuration
 
-This document provides details on how to configure Multi-Context Prompts (MCP) servers within the Intelligent Gemini CLI system. MCP servers allow the system to interact with external services for specialized prompt generation or processing.
+This document provides details on how to configure Model Context Protocol (MCP) servers within the Intelligent Gemini CLI system. MCP servers allow the system to interact with external services for specialized prompt generation or processing.
 
 ## Configuration Location
 
@@ -39,8 +39,12 @@ MCP server configurations are defined under the `mcpServers` key in your `settin
 
 ## Example Configuration
 
-A sample MCP server configuration is available in `mcp-server-config-sample.json` in the project's root directory.
+A sample MCP server configuration is available in `mcp-manifest-sample.json` in the project's root directory.
 
 ## Auto-Installation of MCPs
 
-MCPs can also be automatically installed during the project setup. Refer to the [README.md](../README.md) for details on how to define MCPs for auto-installation using `mcp-manifest.json`.
+Model Context Protocol (MCP) servers can also be automatically installed during the project setup. This process utilizes an optional `mcp-manifest.json` file located at the project root.
+
+If `mcp-manifest.json` is present, the system will read it during installation (`make install`) and add the defined MCPs to your `~/.gemini/settings.json` file. The installation process will check for existing MCPs and only add new ones, ensuring idempotency.
+
+**Important:** The `mcp-manifest.json` file is not created by the system. If this file is not present, the MCP auto-installation step will be skipped. Refer to the [README.md](../README.md) for further details on the structure of `mcp-manifest.json`.
