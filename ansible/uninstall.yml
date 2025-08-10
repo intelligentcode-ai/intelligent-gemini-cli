@@ -1,0 +1,64 @@
+---
+# Intelligent Gemini CLI Uninstall Playbook
+# Conservative by default, preserves user data
+
+- name: Uninstall Intelligent Gemini CLI
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  
+  vars:
+    gemini_home: "{{ ansible_env.HOME }}/.gemini"
+    force_removal: "{{ force_removal | default(false) }}"
+    timestamp: "{{ ansible_date_time.iso8601_basic_short }}"
+    
+  tasks:
+    - name: Check if installation exists
+      stat:
+        path: "{{ gemini_home }}/.installed"
+      register: install_marker
+
+    - name: Abort if not installed
+      fail:
+        msg: "Intelligent Gemini CLI not found at {{ gemini_home }}"
+      when: not install_marker.stat.exists
+
+    - name: Backup user data before uninstall
+      archive:
+        path: "{{ gemini_home }}"
+        dest: "{{ ansible_env.HOME }}/intelligent-gemini-backup-{{ timestamp }}.tar.gz"
+        format: gz
+      when: not force_removal
+
+    - name: Conservative uninstall - remove only system files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ gemini_home }}/behaviors"
+        - "{{ gemini_home }}/roles"
+        - "{{ gemini_home }}/prb-templates"
+        - "{{ gemini_home }}/commands"
+        - "{{ gemini_home }}/.installed"
+      when: not force_removal
+
+    - name: Force uninstall - remove everything
+      file:
+        path: "{{ gemini_home }}"
+        state: absent
+      when: force_removal
+
+    - name: Display uninstall summary (conservative)
+      debug:
+        msg:
+          - "✅ Intelligent Gemini CLI uninstalled"
+          - "User data preserved in: {{ gemini_home }}/memory"
+          - "Backup created at: ~/intelligent-gemini-backup-{{ timestamp }}.tar.gz"
+      when: not force_removal
+
+    - name: Display uninstall summary (force)
+      debug:
+        msg:
+          - "✅ Intelligent Gemini CLI completely removed"
+          - "All data deleted from: {{ gemini_home }}"
+      when: force_removal

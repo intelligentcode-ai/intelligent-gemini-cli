@@ -1,0 +1,169 @@
+---
+# Intelligent Gemini CLI Installation Playbook
+# Based on Intelligent Claude Code installation system
+
+- name: Install Intelligent Gemini CLI
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  
+  vars:
+    gemini_home: "{{ ansible_env.HOME }}/.gemini"
+    project_root: "{{ playbook_dir }}/.."
+    timestamp: "{{ ansible_date_time.iso8601_basic_short }}"
+    
+  tasks:
+    - name: Create .gemini directory structure
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ gemini_home }}"
+        - "{{ gemini_home }}/commands"
+        - "{{ gemini_home }}/behaviors"
+        - "{{ gemini_home }}/roles"
+        - "{{ gemini_home }}/prb-templates"
+        - "{{ gemini_home }}/memory"
+        - "{{ gemini_home }}/backups"
+      tags: [install, update]
+
+    
+
+    - name: Copy behavioral patterns
+      copy:
+        src: "{{ project_root }}/src/behaviors/"
+        dest: "{{ gemini_home }}/behaviors/"
+        mode: '0644'
+      tags: [install, update]
+
+    - name: Copy role definitions
+      copy:
+        src: "{{ project_root }}/src/roles/"
+        dest: "{{ gemini_home }}/roles/"
+        mode: '0644'
+      tags: [install, update]
+
+    - name: Copy PRB templates
+      copy:
+        src: "{{ project_root }}/src/prb-templates/"
+        dest: "{{ gemini_home }}/prb-templates/"
+        mode: '0644'
+      tags: [install, update]
+
+    - name: Copy TOML commands
+      copy:
+        src: "{{ project_root }}/src/commands/"
+        dest: "{{ gemini_home }}/commands/"
+        mode: '0644'
+      tags: [install, update]
+
+    
+
+    - name: Check for existing GEMINI.md
+      stat:
+        path: "{{ gemini_home }}/GEMINI.md"
+      register: gemini_md_stat
+      tags: [install]
+
+    - name: Create minimal GEMINI.md if none exists
+      blockinfile:
+        path: "{{ gemini_home }}/GEMINI.md"
+        create: yes
+        marker: "# {mark} INTELLIGENT GEMINI CLI IMPORTS"
+        block: |
+          # Intelligent Gemini CLI
+
+          This file bootstraps the Intelligent Gemini CLI system.
+          Core behaviors are imported from the virtual team module.
+
+          ## Virtual Team System
+          @~/.gemini/behaviors/virtual-team.md
+      when: not gemini_md_stat.stat.exists
+      tags: [install]
+
+    - name: Ensure virtual-team import exists in existing GEMINI.md
+      lineinfile:
+        path: "{{ gemini_home }}/GEMINI.md"
+        line: "@~/.gemini/behaviors/virtual-team.md"
+        regexp: "^@~/.gemini/behaviors/virtual-team.md"
+      when: gemini_md_stat.stat.exists
+      tags: [install]
+
+    - name: Check for existing settings.json
+      stat:
+        path: "{{ gemini_home }}/settings.json"
+      register: settings_json_stat
+      tags: [install]
+
+    - name: Copy minimal settings.json if none exists
+      copy:
+        src: "{{ project_root }}/settings.json"
+        dest: "{{ gemini_home }}/settings.json"
+        mode: '0644'
+      when: not settings_json_stat.stat.exists
+      tags: [install]
+
+    - name: Copy system configuration
+      copy:
+        src: "{{ project_root }}/src/config.md"
+        dest: "{{ gemini_home }}/config.md"
+        mode: '0644'
+      tags: [install]
+
+    - name: Initialize memory system
+      file:
+        path: "{{ gemini_home }}/memory/{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - authentication
+        - errors
+        - performance
+        - deployment
+        - configuration
+        - migration
+        - system-setup
+        - integration
+        - installation
+      tags: [install]
+
+    - name: Copy memory index
+      copy:
+        src: "{{ project_root }}/memory/index.md"
+        dest: "{{ gemini_home }}/memory/index.md"
+        mode: '0644'
+      tags: [install, update]
+
+    - name: Check Gemini CLI installation
+      command: which gemini
+      register: gemini_check
+      ignore_errors: yes
+      changed_when: false
+      tags: [install]
+
+    - name: Display Gemini CLI status
+      debug:
+        msg: "{{ 'Gemini CLI found at: ' + gemini_check.stdout if gemini_check.rc == 0 else 'Gemini CLI not found - please install separately' }}"
+      tags: [install]
+
+    - name: Create installation marker
+      copy:
+        content: |
+          Intelligent Gemini CLI
+          Installed: {{ ansible_date_time.iso8601 }}
+          Version: 1.0.0
+          Source: {{ project_root }}
+        dest: "{{ gemini_home }}/.installed"
+        mode: '0644'
+      tags: [install]
+
+    - name: Display installation summary
+      debug:
+        msg:
+          - "✅ Intelligent Gemini CLI installed successfully!"
+          - "Installation directory: {{ gemini_home }}"
+          - "Commands available in: {{ gemini_home }}/commands/"
+          - "Behavioral patterns in: {{ gemini_home }}/behaviors/"
+          - "PRB templates in: {{ gemini_home }}/prb-templates/"
+      tags: [install]

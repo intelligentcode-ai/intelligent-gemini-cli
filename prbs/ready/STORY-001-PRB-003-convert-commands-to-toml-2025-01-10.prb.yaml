@@ -1,0 +1,65 @@
+prb_id: "STORY-001-PRB-003"
+title: "Convert /icc-* Commands to Gemini TOML Format"
+complexity: "medium"
+parent_story: "STORY-001"
+
+complete_context:
+  system_nature: "MARKDOWN-BASED AI-AGENTIC SYSTEM"
+  project_root: "/Users/ksamaschke/Work/Engineering/intelligent-gemini-cli-project/intelligent-gemini-cli"
+  source_commands: "/Users/ksamaschke/Work/Engineering/intelligent-claude-code/src/commands"
+  configuration:
+    target_format: "TOML"
+    source_format: "Markdown definitions"
+  user_requirements:
+    original_request: "Convert all /icc-* commands to Gemini CLI TOML format"
+    success_criteria:
+      - "All commands converted to TOML files"
+      - "Commands work in Gemini CLI"
+      - "Functionality preserved"
+
+functional_requirements:
+  - Analyze all /icc-* command definitions in source
+  - Create TOML equivalents in src/commands/ directory
+  - Convert command logic to Gemini CLI prompt format
+  - Implement argument handling with {{args}} syntax
+  - Test commands in Gemini CLI environment
+
+key_commands_to_convert:
+  - "/icc-create-prb" → "create-prb.toml"
+  - "/icc-search-memory" → "search-memory.toml"
+  - "/icc-analyze-complexity" → "analyze-complexity.toml"
+  - "/icc-validate-naming" → "validate-naming.toml"
+  - "/icc-assign-role" → "assign-role.toml"
+  - "/icc-break-down-story" → "break-down-story.toml"
+
+technical_requirements:
+  - TOML format with description and prompt fields
+  - Shell command integration where needed ($(find), $(cat))
+  - Proper argument passing with {{args}} placeholder
+  - File path references updated for Gemini structure
+
+processual_requirements:
+  - Document conversion patterns for future reference
+  - Test each converted command individually
+  - Create examples of command usage
+  - Validate command discovery by Gemini CLI
+
+role_assignment:
+  assigned_role: "@Developer"
+  rationale: "Command conversion requires understanding both systems"
+
+git_operations:
+  - stage: "Add all converted TOML command files"
+  - commit: "feat: Convert Claude commands to Gemini TOML format"
+  - push: true
+
+knowledge_management:
+  capture_learnings: true
+  memory_location: "memory/migration/command-conversion.md"
+  learning_focus: "TOML command patterns and Gemini CLI integration"
+
+success_criteria:
+  - All key commands converted to working TOML files
+  - Commands discoverable by Gemini CLI
+  - Argument handling works correctly
+  - No functionality lost in conversion

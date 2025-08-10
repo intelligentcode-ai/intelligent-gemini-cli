@@ -1,0 +1,106 @@
+# Nano PRB Template - Simple One-Line Changes
+# For trivial instruction complexity (2 points or less) - AI executes instantly
+
+# ⚠️ CRITICAL: FOLLOW ALL SECTIONS - SKIP NOTHING
+# ⚠️ SETTINGS: git_privacy: true = NO AI mentions in commits
+
+id: "[PARENT_ID]-PRB-[NEXT_NUMBER]-[TITLE]-[CURRENT_DATE]"
+type: nano-prb
+complexity: trivial
+priority: "[PRIORITY_LEVEL]"  # CRITICAL, HIGH, MEDIUM, LOW
+title: "[AUTO-ROLE] [DESCRIPTION]"
+
+# MANDATORY: Complete Context Section
+complete_context:
+  project: "[CLAUDE.md]"        # Project context from CLAUDE.md
+  settings: "[ALL-SETTINGS]"   # All configuration values
+  git_privacy: "[FROM_CONFIG]" # git_privacy setting from config
+  branch_protection: "[FROM_CONFIG]" # branch_protection from config
+  default_branch: "[FROM_CONFIG]"    # default_branch from config
+  branch_strategy: "[FROM_CONFIG]"   # branch_prefixes from config
+  best_practices:
+    # Minimal best-practices for trivial changes (optional)
+    - "[DYNAMIC_BEST_PRACTICES_1]"
+
+# MANDATORY: Requirements Section
+requirements:
+  functional:
+    - "[SPECIFIC_CHANGE_NEEDED]"
+  processual:
+    - "Respect git_privacy setting for commit messages"
+    - "Follow branch protection if enabled"
+    - "Use configured default branch"
+
+# What to do - simple and direct
+what_to_do:
+  action: "[SPECIFIC_CHANGE]"
+  file: "[FILE_PATH]"
+  line: "[LINE_NUMBER]" # Optional
+  
+how_to_check:
+  - "[SIMPLE_CHECK]"
+
+# MANDATORY: Git Operations Section  
+# ⚠️ git_privacy: true = NO "Generated with Claude Code", NO "Co-Authored-By: Claude"
+git_operations:
+  branch_strategy: "[FROM_CONFIG]"     # Use configured branch strategy
+  branch_protection: "[FROM_CONFIG]"  # Respect branch protection setting
+  commit_format: "[ID]: [DESCRIPTION]"
+  privacy_filter: "[FROM_CONFIG]"     # Apply git_privacy if enabled - CRITICAL!
+  default_branch: "[FROM_CONFIG]"     # Target configured default branch
+  version_bump: "[NONE|PATCH]"        # PATCH for fixes, NONE for trivial
+
+# MANDATORY: Knowledge Management Section
+knowledge_management:
+  structure: "memory/[topic]/[subtopic].md"
+  storage: "version-controlled"
+  capture: "not_needed_for_trivial"
+
+# MANDATORY: Review Process Section
+review_process:
+  type: "no_review_needed"
+  rationale: "trivial_change"
+
+# MANDATORY: Documentation Management Section
+documentation_management:
+  required_updates:
+    changelog:
+      file: "CHANGELOG.md"
+      entry_format: |
+        ### Fixed
+        - [NANO_CHANGE_DESCRIPTION]
+      semantic_versioning: true
+      mandatory: true
+      
+    readme:
+      file: "README.md"  
+      update_required: "[YES_IF_DOCS_CHANGED]"
+      sections_affected: "[NONE_USUALLY]"
+      
+  release_management:
+    github_release: "NO"     # Patch bumps don't need releases
+    release_notes: "NO"      # Trivial changes documented in CHANGELOG only
+    
+  validation_checklist:
+    - "CHANGELOG.md updated with fix entry"
+    - "Version bumped (patch) if applicable"
+
+# MANDATORY: Implementation Samples Section
+# ⚠️ EXECUTION CHECKLIST: All 6 sections must be completed
+implementation_samples:
+  example_commit: "[NANO-001]: Fix typo in README.md"
+  example_change: "Line 15: 'documnetation' → 'documentation'"
+  
+  execution_checklist: |
+    ☐ Complete Context Section - Settings loaded and applied
+    ☐ Requirements Section - All requirements met  
+    ☐ Git Operations Section - Commands executed with privacy_filter
+    ☐ Documentation Updates Section - CHANGELOG.md and affected files updated
+    ☐ Knowledge Management Section - Captured if needed
+    ☐ Review Process Section - Completed or justified skip
+    ☐ Documentation Management Section - CHANGELOG updated, version bumped
+    ☐ Implementation Samples Section - Applied correctly
+    
+    SKIP NOTHING. EXECUTE EVERYTHING. DOCUMENT ALL CHANGES.
+  
+# Minimal overhead for trivial changes but ALL sections still mandatory

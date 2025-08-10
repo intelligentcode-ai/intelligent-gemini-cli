@@ -1,0 +1,57 @@
+prb_id: "STORY-001-PRB-002"
+title: "Migrate Behavioral Patterns from Claude to Gemini"
+complexity: "medium"
+parent_story: "STORY-001"
+
+complete_context:
+  system_nature: "MARKDOWN-BASED AI-AGENTIC SYSTEM"
+  project_root: "/Users/ksamaschke/Work/Engineering/intelligent-gemini-cli-project/intelligent-gemini-cli"
+  source_path: "/Users/ksamaschke/.claude/behaviors"
+  configuration:
+    target_system: "gemini-cli"
+    source_system: "intelligent-claude-code"
+  user_requirements:
+    original_request: "Copy all behavioral patterns from Intelligent Claude Code to Gemini CLI"
+    success_criteria:
+      - "All behavioral markdown files copied"
+      - "Import structure works in GEMINI.md"
+      - "Patterns function identically in Gemini"
+
+functional_requirements:
+  - Copy all files from ~/.claude/behaviors/ to src/behaviors/
+  - Copy all files from ~/.claude/roles/ to src/roles/
+  - Update GEMINI.md to import behavioral patterns
+  - Test that imports work correctly
+  - Validate behavioral patterns load in Gemini CLI
+
+technical_requirements:
+  - Preserve exact file structure and naming
+  - Maintain markdown formatting and syntax
+  - Ensure @file.md import syntax compatibility
+  - No modification of behavioral content needed
+
+processual_requirements:
+  - Verify all source files copied completely
+  - Test GEMINI.md import functionality
+  - Document any compatibility issues found
+  - Create backup of original files
+
+role_assignment:
+  assigned_role: "@Developer"
+  rationale: "File migration and import testing requires development skills"
+
+git_operations:
+  - stage: "Add all migrated behavioral patterns"
+  - commit: "feat: Migrate behavioral patterns from Claude to Gemini"
+  - push: true
+
+knowledge_management:
+  capture_learnings: true
+  memory_location: "memory/migration/behavioral-patterns.md"
+  learning_focus: "Import syntax differences and compatibility"
+
+success_criteria:
+  - All behavioral pattern files copied successfully
+  - GEMINI.md imports work without errors
+  - Behavioral patterns accessible in Gemini CLI context
+  - No functionality lost in migration

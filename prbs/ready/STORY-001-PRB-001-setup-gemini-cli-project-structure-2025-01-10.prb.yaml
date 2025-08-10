@@ -1,0 +1,52 @@
+prb_id: "STORY-001-PRB-001"
+title: "Setup Gemini CLI Project Structure"
+complexity: "tiny"
+parent_story: "STORY-001"
+
+complete_context:
+  system_nature: "MARKDOWN-BASED AI-AGENTIC SYSTEM"
+  project_root: "/Users/ksamaschke/Work/Engineering/intelligent-gemini-cli-project/intelligent-gemini-cli"
+  configuration:
+    target_system: "gemini-cli"
+    source_system: "intelligent-claude-code"
+  user_requirements:
+    original_request: "Setup basic project structure for Intelligent Gemini CLI"
+    success_criteria: 
+      - "Directory structure matches Intelligent Claude Code"
+      - "All standard directories created"
+      - "Ready for content migration"
+
+functional_requirements:
+  - Create src/behaviors/ directory for behavioral patterns
+  - Create src/roles/ directory for role definitions  
+  - Create src/prb-templates/ directory for PRB templates
+  - Create src/commands/ directory for TOML commands
+  - Create memory/ directory for learning storage
+  - Create docs/ directory for documentation
+  - Create GEMINI.md main context file
+  - Create settings.json configuration file
+
+technical_requirements:
+  - Follow Gemini CLI directory conventions
+  - Ensure compatibility with GEMINI.md imports
+  - Structure supports TOML command loading
+  - Memory directory supports hierarchical organization
+
+role_assignment:
+  assigned_role: "@Developer"
+  rationale: "Project structure setup requires development skills"
+  
+git_operations:
+  - stage: "Add all new directories and files"
+  - commit: "feat: Setup Gemini CLI project structure"
+  - push: true
+
+knowledge_management:
+  capture_learnings: true
+  memory_location: "memory/project-setup/gemini-cli-structure.md"
+  
+success_criteria:
+  - All required directories exist
+  - GEMINI.md file created with proper import structure
+  - settings.json configured for Gemini CLI
+  - Directory structure documented
