@@ -1,0 +1,5 @@
+# Ignore memory files
+memory/
+
+# Ignore gemini directory
+.gemini/
