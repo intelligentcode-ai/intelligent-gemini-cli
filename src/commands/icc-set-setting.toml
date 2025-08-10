@@ -1,0 +1,25 @@
+description = "Set a configuration value in the project-level config.md file."
+
+prompt = """
+# Set Project-Level Setting
+
+Saves a configuration setting to the `config.md` file in the project's root directory.
+
+## Usage
+`/icc-set-setting [key] [value]`
+
+## Arguments
+- `key` - The configuration key to set.
+- `value` - The value to set for the key.
+
+## Behavior
+- The command will open the `<project-dir>/config.md` file.
+- It will search for a section with the heading `## [Key]`, where `Key` is the capitalized version of the key.
+- If the section exists, it will update the value.
+- If the section does not exist, it will create a new section for the key and set the value.
+- The format will be:
+  ```markdown
+  ## [Key]
+  [key]: [value]
+  ```
+"""
