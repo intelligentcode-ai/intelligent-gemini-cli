@@ -20,6 +20,31 @@ This will:
 3. Configure settings.json
 4. Initialize memory system
 
+### MCP Auto-Installation
+
+The Intelligent Gemini CLI supports automatic installation of Multi-Context Prompts (MCPs) defined in `mcp-manifest.json` at the project root. These MCPs are automatically added to your `~/.gemini/settings.json` file during installation.
+
+To define MCPs for auto-installation, create an `mcp-manifest.json` file in your project's root directory with the following structure:
+
+```json
+{
+  "mcpServers": {
+    "serverName": {
+      "command": "path/to/server",
+      "args": ["--arg1", "value1"],
+      "env": {
+        "API_KEY": "$MY_API_TOKEN"
+      },
+      "cwd": "./server-directory",
+      "timeout": 30000,
+      "trust": false
+    }
+  }
+}
+```
+
+During the installation process (`make install`), the system will check for existing MCPs in `~/.gemini/settings.json` and only install new ones, ensuring idempotency.
+
 ### Uninstall
 ```bash
 # Conservative (preserves user data)
