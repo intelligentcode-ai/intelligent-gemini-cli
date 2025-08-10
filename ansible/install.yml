@@ -31,8 +31,6 @@
         - "{{ gemini_home }}/backups"
       tags: [install, update]
 
-    
-
     - name: Copy behavioral patterns
       copy:
         src: "{{ project_root }}/src/behaviors/"
@@ -60,8 +58,6 @@
         dest: "{{ gemini_home }}/commands/"
         mode: '0644'
       tags: [install, update]
-
-    
 
     - name: Check for existing GEMINI.md
       stat:
@@ -141,7 +137,8 @@
 
     - name: Parse API keys
       set_fact:
-        api_keys: "{{ api_keys_content.content | b64decode | splitlines | select('match', '^[^=]+=(.*)
+        api_keys: "{{ api_keys_content.content | b64decode | split('\n') | select('match', '^[^=]+=(.*)') | map('split', '=', 1) | map('map', 'trim') | list }}"
+      tags: [install, update]
 
     - name: Read existing settings.json
       slurp:
@@ -173,11 +170,20 @@
       when: api_keys is defined and api_keys | length > 0
       tags: [install, update]
 
+    - name: Debug API keys content
+      debug:
+        var: api_keys
+      when: api_keys is defined and api_keys | length > 0
+
+    - name: Prepare API key substitution data
+      set_fact: 
+        api_key_sub_data: "{{ api_keys | json_query('[*].{key: [0], value: [1]}') }}"
+
     - name: Replace API key placeholders
       set_fact:
-        current_settings_str: "{{ current_settings_str | regex_replace('\$\{' + item.key + '\}', item.value) }}"
-      loop: "{{ api_keys | dict2items }}"
-      when: api_keys is defined and api_keys | length > 0
+        current_settings_str: "{{ current_settings_str | replace('${' + item.key + '}', item.value) }}"
+      loop: "{{ api_key_sub_data | list }}"
+      when: api_key_sub_data is defined and api_key_sub_data | length > 0
       tags: [install, update]
 
     - name: Convert modified settings string back to JSON
@@ -255,120 +261,5 @@
           - "Commands available in: {{ gemini_home }}/commands/"
           - "Behavioral patterns in: {{ gemini_home }}/behaviors/"
           - "PRB templates in: {{ gemini_home }}/prb-templates/"
-      tags: [install]) | map('split', '=', 1) | map('map', 'trim') | dict }}"
       when: api_keys_content is defined and api_keys_content.content is defined
       tags: [install, update]
-
-    - name: Read existing settings.json
-      slurp:
-        src: "{{ gemini_home }}/settings.json"
-      register: settings_json_content
-      tags: [install, update]
-
-    - name: Parse settings.json JSON
-      set_fact:
-        current_settings: "{{ settings_json_content.content | b64decode | from_json }}"
-      tags: [install, update]
-
-    - name: Ensure mcpServers block exists in settings.json
-      set_fact:
-        current_settings: "{{ current_settings | combine({'mcpServers': {}}) }}"
-      when: current_settings.mcpServers is not defined
-      tags: [install, update]
-
-    - name: Add or update MCPs in settings.json
-      set_fact:
-        current_settings: "{{ current_settings | combine({'mcpServers': current_settings.mcpServers | combine({item.key: item.value})}) }}"
-      loop: "{{ mcp_manifest.mcpServers | dict2items }}"
-      when: item.key not in current_settings.mcpServers
-      tags: [install, update]
-
-    - name: Perform API key substitution in settings.json content
-      set_fact:
-        current_settings_str: "{{ current_settings | to_json }}"
-      when: api_keys is defined and api_keys | length > 0
-      tags: [install, update]
-
-    - name: Replace API key placeholders
-      set_fact:
-        current_settings_str: "{{ current_settings_str | regex_replace('\$\{' + item.key + '\}', item.value) }}"
-      loop: "{{ api_keys | dict2items }}"
-      when: api_keys is defined and api_keys | length > 0
-      tags: [install, update]
-
-    - name: Convert modified settings string back to JSON
-      set_fact:
-        current_settings: "{{ current_settings_str | from_json }}"
-      when: api_keys is defined and api_keys | length > 0
-      tags: [install, update]
-
-    - name: Write updated settings.json
-      copy:
-        content: "{{ current_settings | to_nice_json }}"
-        dest: "{{ gemini_home }}/settings.json"
-        mode: '0644'
-      tags: [install, update]
-
-    - name: Copy system configuration
-      copy:
-        src: "{{ project_root }}/src/config.md"
-        dest: "{{ gemini_home }}/config.md"
-        mode: '0644'
-      tags: [install]
-
-    - name: Initialize memory system
-      file:
-        path: "{{ gemini_home }}/memory/{{ item }}"
-        state: directory
-        mode: '0755'
-      loop:
-        - authentication
-        - errors
-        - performance
-        - deployment
-        - configuration
-        - migration
-        - system-setup
-        - integration
-        - installation
-      tags: [install]
-
-    - name: Copy memory index
-      copy:
-        src: "{{ project_root }}/memory/index.md"
-        dest: "{{ gemini_home }}/memory/index.md"
-        mode: '0644'
-      tags: [install, update]
-
-    - name: Check Gemini CLI installation
-      command: which gemini
-      register: gemini_check
-      ignore_errors: yes
-      changed_when: false
-      tags: [install]
-
-    - name: Display Gemini CLI status
-      debug:
-        msg: "{{ 'Gemini CLI found at: ' + gemini_check.stdout if gemini_check.rc == 0 else 'Gemini CLI not found - please install separately' }}"
-      tags: [install]
-
-    - name: Create installation marker
-      copy:
-        content: |
-          Intelligent Gemini CLI
-          Installed: {{ ansible_date_time.iso8601 }}
-          Version: 1.0.0
-          Source: {{ project_root }}
-        dest: "{{ gemini_home }}/.installed"
-        mode: '0644'
-      tags: [install]
-
-    - name: Display installation summary
-      debug:
-        msg:
-          - "✅ Intelligent Gemini CLI installed successfully!"
-          - "Installation directory: {{ gemini_home }}"
-          - "Commands available in: {{ gemini_home }}/commands/"
-          - "Behavioral patterns in: {{ gemini_home }}/behaviors/"
-          - "PRB templates in: {{ gemini_home }}/prb-templates/"
-      tags: [install]

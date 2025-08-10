@@ -41,6 +41,16 @@ Retrieves configuration values from the hierarchy.
 3. User config (~/.claude/config.md - system-wide only)
 4. System defaults
 
+### Makefile Parameters for Installation
+
+The `make install` command supports the following optional parameters:
+
+*   `MCP_CONFIG_PATH`: Specifies an external path to a JSON file containing Model Context Protocol (MCP) server configurations for auto-installation. If provided, this file will be used instead of the default `mcp-manifest.json` in the project root.
+    **Usage:** `make install MCP_CONFIG_PATH=/path/to/your/mcp-config.json`
+
+*   `API_KEYS_FILE`: Specifies a path to a file containing API keys (e.g., `KEY=VALUE` pairs, one per line) that should be substituted into the installed `settings.json` file. This allows for secure handling of sensitive credentials.
+    **Usage:** `make install API_KEYS_FILE=/path/to/your/api-keys.env`
+
 ## PRB Commands
 
 ### `/icc-create-prb`

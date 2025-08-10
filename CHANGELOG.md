@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.20.0 - 2025-08-10
+
+### Added
+- Add Makefile parameters for MCP config and API keys.
+
 ## 6.19.0 - 2025-08-10
 
 ### Added

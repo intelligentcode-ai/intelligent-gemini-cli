@@ -1,0 +1,205 @@
+# Medium PRB Template - Standard Features
+# For moderate instruction complexity (6-15 points) - AI executes instantly
+# Provides complete instructions for multi-file features
+
+# ⚠️ CRITICAL: FOLLOW ALL SECTIONS - SKIP NOTHING
+# ⚠️ SETTINGS: git_privacy: true = NO AI mentions in commits
+# ⚠️ TEMPLATES: [DYNAMIC_*_PRACTICES] placeholders get filled with actual content
+
+id: "STORY-001-PRB-011-add-makefile-mcp-api-params-2025-08-10"
+type: medium-prb
+complexity: standard
+priority: "HIGH"
+role: "DevOps-Engineer"
+title: "DevOps-Engineer Add Makefile parameters for MCP config and API keys"
+
+# MANDATORY: Complete Context Section
+complete_context:
+  project: |
+    The Intelligent Gemini CLI is a markdown-based AI-agentic system that transforms Gemini CLI into an intelligent virtual development team. It operates within this project directory and serves as an AI instruction framework.
+  settings: |
+    Current system settings include:
+    - theme: dark
+    - thinkingBudget: 30000
+    - commandsDirectory: ~/.gemini/commands
+  git_privacy: "true"
+  branch_protection: "true"
+  default_branch: "main"
+  branch_strategy: "feature/"
+  scope: "Add support for MCP_CONFIG_PATH and API_KEYS_FILE in Makefile"
+  best_practices: [] # Auto-discovered practices will be injected at runtime.
+  code_samples:
+    - search: "Makefile"
+    - reference: "Makefile"
+  external_docs:
+    - url: ""
+    - context7: ""
+  
+# MANDATORY: Requirements Section
+requirements:
+  functional:
+    - "Add MCP_CONFIG_PATH parameter to Makefile to specify external MCP configuration."
+    - "Add API_KEYS_FILE parameter to Makefile to specify a file containing API keys for substitution."
+    - "Ensure the Makefile correctly uses these parameters to pass paths to the Ansible playbook."
+  processual:
+    - "Respect git_privacy setting for commit messages"
+    - "Follow branch protection strategy from config"
+    - "Use configured default branch for operations"
+    - "Apply configured branch naming strategy"
+  technical:
+    - "Modify Makefile to accept and pass new parameters."
+    - "Ensure secure handling of API keys, substituting them in the output."
+  constraints:
+    coding_style: "Standard project coding style."
+    architecture: "Existing project architecture."
+    infrastructure: "Existing project infrastructure."
+    security: "Standard project security practices."
+    quality: "Standard project quality practices."
+    
+# Embedded learnings and best-practices (no runtime search needed)
+embedded_learnings: [] # Auto-discovered from memory/ during PRB generation.
+
+embedded_best_practices: [] # Auto-discovered from best-practices/ during PRB generation.
+  
+# Execution plan with configurable behaviors
+execution_plan:
+  approach: |
+    1. Modify the Makefile to define and accept MCP_CONFIG_PATH and API_KEYS_FILE as optional parameters.
+    2. Update the Ansible playbook (ansible/install.yml) to read these parameters from the environment or command line.
+    3. Implement logic in the Ansible playbook to use MCP_CONFIG_PATH for the mcp-manifest.json path.
+    4. Implement logic in the Ansible playbook to read API_KEYS_FILE and perform substitutions in settings.json.
+  behavioral_overrides:  # Project-specific behavior customization
+    error_handling: "Standard"
+    testing_approach: "Manual validation"
+    review_process: "Architect review"
+  steps:
+    - "Modify Makefile to accept MCP_CONFIG_PATH and API_KEYS_FILE"
+    - "Update ansible/install.yml to use MCP_CONFIG_PATH for mcp-manifest.json path"
+    - "Update ansible/install.yml to read API_KEYS_FILE and perform substitutions"
+    - "Test the new parameters"
+    
+# Instructions for what to create/modify  
+what_to_do:
+  files_to_modify:
+    - path: "Makefile"
+      changes: "Add MCP_CONFIG_PATH and API_KEYS_FILE as optional parameters."
+    - path: "ansible/install.yml"
+      changes: "Update to read MCP_CONFIG_PATH and API_KEYS_FILE, and use them for mcp-manifest.json path and API key substitution."
+      
+how_to_validate:
+  technical:
+    - "Run Makefile with MCP_CONFIG_PATH and verify Ansible playbook uses the specified path."
+    - "Run Makefile with API_KEYS_FILE and verify API keys are correctly substituted in settings.json."
+  functional:
+    - "Verify that MCPs are installed correctly when MCP_CONFIG_PATH is used."
+    - "Verify that API keys are correctly applied when API_KEYS_FILE is used."
+    
+# Expert to review the work
+expert_review:
+  reviewer: "@DevOps-Architect"
+  focus_areas: ["Makefile modifications", "Ansible parameter handling", "API key security"]
+  max_cycles: 3
+  
+# MANDATORY: Git Operations Section
+# ⚠️ git_privacy: true = NO "Generated with Claude Code", NO "Co-Authored-By: Claude"
+git_operations:
+  branch_strategy: "feature/"
+  branch_protection: "true"
+  branch_name: "feature/STORY-001-PRB-011-add-makefile-mcp-api-params"
+  commit_format: "STORY-001-PRB-011: [DESCRIPTION]"
+  privacy_filter: "true"
+  default_branch: "main"
+  version_bump: "MINOR"
+
+# MANDATORY: Documentation Updates Section
+documentation_updates:
+  - file: "CHANGELOG.md"
+    action: "Update with PR description"
+  - file: "docs/commands-reference.md"
+    action: "Add documentation for MCP_CONFIG_PATH and API_KEYS_FILE Makefile parameters."
+  - file: "README.md"
+    action: "Update if user-facing impact."
+  
+# MANDATORY: Knowledge Management Section
+knowledge_management:
+  structure: "memory/configuration/makefile-params.md"
+  storage: "not-version-controlled"
+  embedded_learnings: "pre_searched_patterns"
+  capture_patterns: "Adding optional parameters to Makefile for configuration."
+  capture_insights: "Best practices for passing sensitive information (API keys) via Makefile to Ansible."
+  store_location: "memory/configuration/makefile-params.md"
+
+# MANDATORY: Review Process Section
+review_process:
+  type: "sme_review"
+  reviewer: "@DevOps-Architect"
+  focus_areas: ["Makefile modifications", "Ansible parameter handling", "API key security"]
+  max_cycles: 3
+  checklist:
+    - "Configuration settings applied correctly"
+    - "Multi-file coordination successful"
+    - "Functional requirements met"
+    - "Technical constraints satisfied"
+
+# MANDATORY: Documentation Management Section
+documentation_management:
+  required_updates:
+    changelog:
+      file: "CHANGELOG.md"
+      entry_format: |
+        ## [VERSION] - DATE
+        ### Added/Fixed/Changed/Removed
+        - Add Makefile parameters for MCP config and API keys.
+      semantic_versioning: true
+      mandatory: true
+      
+    readme:
+      file: "README.md"  
+      update_required: "YES"
+      sections_affected: "Usage, Installation"
+      user_impact: "Users can now specify external MCP configuration and API key files via Makefile parameters."
+      
+    api_docs:
+      update_required: "NO"
+      files_affected: ""
+      breaking_changes: "NO"
+      
+  release_management:
+    github_release: "YES_FOR_MINOR_BUMPS"  # Create release for feature additions
+    release_notes: "YES"                   # Document new features
+    migration_guide: "NO"
+    
+  validation_checklist:
+    - "CHANGELOG.md updated with feature/fix description"
+    - "Version bumped appropriately (patch/minor)"
+    - "README.md updated if user-facing changes"
+    - "API docs updated if applicable"
+    - "GitHub release created if minor version bump"
+
+# MANDATORY: Implementation Samples Section
+# ⚠️ EXECUTION CHECKLIST: All 6 sections must be completed
+implementation_samples:
+  example_commit: "STORY-001-PRB-011: Add Makefile parameters for MCP config and API keys"
+  example_branch: "feature/STORY-001-PRB-011-add-makefile-mcp-api-params"
+  example_scope: |
+    Files: Makefile, ansible/install.yml
+    - Add MCP_CONFIG_PATH and API_KEYS_FILE to Makefile
+    - Update ansible/install.yml to use these parameters
+  execution_checklist: |
+    ☐ Complete Context Section - Settings, best practices, code samples loaded
+    ☐ Requirements Section - All functional/processual/technical requirements met
+    ☐ Git Operations Section - Branch created, commits with privacy_filter
+    ☐ Documentation Updates Section - CHANGELOG.md and affected files updated
+    ☐ Knowledge Management Section - Patterns captured + stored in memory/
+    ☐ Review Process Section - SME review completed with max 3 cycles
+    ☐ Documentation Management Section - CHANGELOG, README, docs updated + release if minor
+    ☐ Implementation Samples Section - Applied correctly with multi-file scope
+    
+    SKIP NOTHING. EXECUTE EVERYTHING. FULL LIFECYCLE DELIVERY.
+
+# Store new learnings in version control
+learning_capture:
+  patterns: "Adding optional parameters to Makefile for configuration."
+  insights: "Best practices for passing sensitive information (API keys) via Makefile to Ansible."
+  store_location: "memory/configuration/makefile-params.md"
+  version_control: false
