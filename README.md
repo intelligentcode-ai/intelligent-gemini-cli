@@ -104,16 +104,44 @@ intelligent-gemini-cli/
 
 ## Configuration
 
-Edit `settings.json` to configure:
+Configuration for the Intelligent Gemini CLI is handled at two levels: global and project-specific.
+
+### Global Configuration (`settings.json`)
+
+Global settings are stored in `settings.json`. These settings apply to all projects unless overridden by a project-level configuration. You can edit `settings.json` to configure:
+
 - Autonomy level (L1/L2/L3)
 - Git privacy settings
 - Branch protection
 - Directory paths
 - Command locations
 
-## Based On
+### Project-Specific Configuration (`config.md`)
 
-This is a port of [Intelligent Claude Code](https://github.com/ksamaschke/intelligent-claude-code) adapted for Gemini CLI. The behavioral patterns, role system, and PRB engine are directly ported with minimal modifications to work with Gemini's TOML command system and settings.json configuration.
+For project-specific settings, you can create a `config.md` file in the root of your project directory. Settings in this file will override the global settings from `settings.json`.
+
+The format of the `config.md` file is as follows:
+
+```markdown
+# Project Configuration
+
+## Setting Name
+key: value
+
+## Another Setting
+another_key: another_value
+```
+
+For example, to set the theme for a specific project, you can create a `config.md` file with the following content:
+
+```markdown
+# Project Configuration
+
+## Theme
+theme: "light"
+```
+
+
 
 ## License
 
