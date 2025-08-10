@@ -1,6 +1,6 @@
 # Intelligent Gemini CLI
 
-A port of [Intelligent Claude Code](https://github.com/ksamaschke/intelligent-claude-code) adapted for Gemini CLI, transforming it into an intelligent virtual development team with 14 specialized roles, behavioral framework guidance, and PRB-driven execution.
+A port of [Intelligent Claude Code](https://github.com/intelligentcode-ai/intelligent-claude-code) adapted for Gemini CLI, transforming it into an intelligent virtual development team with 14 specialized roles, behavioral framework guidance, and PRB-driven execution.
 
 ## Installation
 
@@ -142,6 +142,10 @@ theme: "light"
 ```
 
 
+
+## Based On
+
+This is a port of [Intelligent Claude Code](https://github.com/intelligentcode-ai/intelligent-claude-code) adapted for Gemini CLI.
 
 ## License
 
