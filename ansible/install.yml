@@ -104,15 +104,29 @@
       when: not settings_json_stat.stat.exists
       tags: [install]
 
+    - name: Check for mcp-manifest.json
+      stat:
+        path: "{{ project_root }}/mcp-manifest.json"
+      register: mcp_manifest_stat
+      tags: [install, update]
+
     - name: Read MCP manifest
       slurp:
         src: "{{ project_root }}/mcp-manifest.json"
       register: mcp_manifest_content
+      when: mcp_manifest_stat.stat.exists
       tags: [install, update]
 
     - name: Parse MCP manifest JSON
       set_fact:
         mcp_manifest: "{{ mcp_manifest_content.content | b64decode | from_json }}"
+      when: mcp_manifest_stat.stat.exists
+      tags: [install, update]
+
+    - name: Set empty mcp_manifest if file does not exist
+      set_fact:
+        mcp_manifest: {}
+      when: not mcp_manifest_stat.stat.exists
       tags: [install, update]
 
     - name: Read existing settings.json

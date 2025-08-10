@@ -96,23 +96,7 @@ execution_plan:
 
 # Instructions for what to create/modify
 what_to_do:
-  files_to_create:
-    - path: "mcp-manifest.json"
-      content: |
-        {
-          "mcpServers": {
-            "serverName": {
-              "command": "path/to/server",
-              "args": ["--arg1", "value1"],
-              "env": {
-                "API_KEY": "$MY_API_TOKEN"
-              },
-              "cwd": "./server-directory",
-              "timeout": 30000,
-              "trust": false
-            }
-          }
-        }
+  
   files_to_modify:
     - path: "ansible/install.yml"
       changes: "Add tasks to read mcp-manifest.json, read ~/.gemini/settings.json, and add new MCPs if they do not exist."
