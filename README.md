@@ -149,7 +149,7 @@ This is a port of [Intelligent Claude Code](https://github.com/intelligentcode-a
 
 ## License
 
-Same as Intelligent Claude Code - see original repository for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 *Intelligent Gemini CLI - Virtual Team for Gemini*
