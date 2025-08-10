@@ -141,7 +141,7 @@
 
     - name: Parse API keys
       set_fact:
-        api_keys: "{{ api_keys_content.content | b64decode | splitlines | select('match', '.+=.*\s*') | map('split', '=', 1) | map('map', 'trim') | dict }}"
+                api_keys: "{{ api_keys_content.content | b64decode | splitlines | select('match', '.+=.*\s*') | map('split', '=', 1) | map('map', 'trim') | dict }}"
       when: api_keys_content is defined and api_keys_content.content is defined
       tags: [install, update]
 
