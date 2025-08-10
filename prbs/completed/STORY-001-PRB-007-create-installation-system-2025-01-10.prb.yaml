@@ -1,0 +1,58 @@
+prb_id: "STORY-001-PRB-007"
+title: "Create Installation System with Makefile and Ansible"
+complexity: "medium"
+parent_story: "STORY-001"
+
+complete_context:
+  system_nature: "MARKDOWN-BASED AI-AGENTIC SYSTEM"
+  project_root: "/Users/ksamaschke/Work/Engineering/intelligent-gemini-cli-project/intelligent-gemini-cli"
+  reference_system: "/Users/ksamaschke/Work/Engineering/intelligent-claude-code"
+  configuration:
+    installer_type: "Make + Ansible"
+    target_directory: "~/.gemini"
+  user_requirements:
+    original_request: "Create installation system with Makefile and Ansible playbooks"
+    success_criteria:
+      - "Makefile with install/uninstall targets"
+      - "Ansible playbook for installation"
+      - "Compatible with Gemini CLI structure"
+
+functional_requirements:
+  - Create Makefile with standard targets (install, uninstall, update, test)
+  - Create ansible/playbook.yml for main installation
+  - Copy behavioral patterns to ~/.gemini/
+  - Setup GEMINI.md with imports
+  - Setup commands in ~/.gemini/commands/
+
+technical_requirements:
+  - Makefile calls Ansible playbook
+  - Idempotent installation (can run multiple times)
+  - Check for prerequisites (Node.js, npm, Gemini CLI)
+  - Backup existing configuration if present
+  - Support both global and project-level installation
+
+processual_requirements:
+  - Test installation on clean system
+  - Test idempotency with multiple runs
+  - Document installation process
+  - Create uninstall that preserves user data
+
+role_assignment:
+  assigned_role: "@DevOps-Engineer"
+  rationale: "Installation system requires DevOps and Ansible expertise"
+
+git_operations:
+  - stage: "Add Makefile and Ansible playbooks"
+  - commit: "feat: Create installation system with Make and Ansible"
+  - push: true
+
+knowledge_management:
+  capture_learnings: true
+  memory_location: "memory/installation/ansible-setup.md"
+  learning_focus: "Porting Make/Ansible installation from Claude to Gemini"
+
+success_criteria:
+  - make install successfully installs complete system
+  - Ansible playbook is idempotent
+  - All components properly installed to ~/.gemini/
+  - Gemini CLI recognizes installed components
