@@ -14,33 +14,23 @@ title: "[ROLE] [DESCRIPTION]"
 
 # MANDATORY: Complete Context Section
 complete_context:
-  project: "[CLAUDE.md]"        # Project context from CLAUDE.md
-  settings: "[ALL-SETTINGS]"   # All configuration values
-  git_privacy: "[FROM_CONFIG]" # git_privacy setting from config
-  branch_protection: "[FROM_CONFIG]" # branch_protection from config
-  default_branch: "[FROM_CONFIG]"    # default_branch from config
-  branch_strategy: "[FROM_CONFIG]"   # branch_prefixes from config
+  project: "Dynamically injected project context from GEMINI.md."
+  settings: "Dynamically injected all configuration values."
+  git_privacy: "Dynamically injected git_privacy setting from config."
+  branch_protection: "Dynamically injected branch_protection from config."
+  default_branch: "Dynamically injected default_branch from config."
+  branch_strategy: "Dynamically injected branch_prefixes from config."
   scope: "[FEATURE_SCOPE]"
-  best_practices:
-    # Auto-discovered practices from best-practices/ directory
-    # Top 2-3 relevant practices injected based on work type and complexity
-    # No manual configuration needed - system handles discovery
-    - "[DYNAMIC_BEST_PRACTICES_1]"
-    - "[DYNAMIC_BEST_PRACTICES_2]"
-    - "[DYNAMIC_BEST_PRACTICES_3]"
-  code_samples:
-    - search: "[PATTERN_IN_CODEBASE]"
-    - reference: "[EXISTING_IMPLEMENTATION]"
-  external_docs:
-    - url: "[DOCUMENTATION_URL]"
-    - context7: "[LIBRARY_ID]"  # Real-time documentation
+  best_practices: [] # Dynamically injected best practices from best-practices/ directory.
+  code_samples: [] # Dynamically injected code samples based on context.
+  external_docs: [] # Dynamically injected external documentation links.
   
 # MANDATORY: Requirements Section
 requirements:
   functional:
-    - "[REQUIREMENT_1]"
-    - "[REQUIREMENT_2]"
-    - "[REQUIREMENT_3]"
+    - "Describe user-facing features or changes."
+    - "Specify expected outcomes or behaviors."
+    - "List any new capabilities or modifications."
   processual:
     - "Respect git_privacy setting for commit messages"
     - "Follow branch protection strategy from config"
@@ -48,101 +38,86 @@ requirements:
     - "Apply configured branch naming strategy"
   technical:
     - "Write AI instructions in clear, simple language"
-    - "[TECH_REQUIREMENT_2]"
+    - "Specify technical implementation details or approaches."
   constraints:
-    coding_style: "[DYNAMIC_CODING_PRACTICES]"        # From best-practices/development/
-    architecture: "[DYNAMIC_ARCHITECTURE_PRACTICES]"   # From best-practices/architecture/
-    infrastructure: "[DYNAMIC_OPERATIONS_PRACTICES]"   # From best-practices/operations/
-    security: "[DYNAMIC_SECURITY_PRACTICES]"          # From best-practices/security/
-    quality: "[DYNAMIC_QUALITY_PRACTICES]"            # From best-practices/quality/
+    coding_style: "Standard project coding style."
+    architecture: "Existing project architecture."
+    infrastructure: "Existing project infrastructure."
+    security: "Standard project security practices."
+    quality: "Standard project quality practices."
     
 # Embedded learnings and best-practices (no runtime search needed)
-embedded_learnings:
-  # Only MOST RELEVANT 2-3 entries embedded (token-efficient)
-  # Auto-discovered from memory/ during PRB generation
+embedded_learnings: [] # Dynamically injected relevant learnings from memory/.
 
-embedded_best_practices:
-  # Only MOST RELEVANT 2-3 practices embedded (token-efficient)
-  # Auto-discovered from best-practices/ during PRB generation
-  # Replaces [DYNAMIC_*_PRACTICES] placeholders with actual content
-  # Selected based on topic match and recency
-  primary_pattern: |
-    From: memory/authentication/oauth2-patterns.md
-    ## 2025-01-23: OAuth2 Token Refresh
-    [ONLY THIS SPECIFIC ENTRY - max 500 tokens]
-    
-  related_learning: |
-    From: memory/error-handling/api-errors.md  
-    ## 2025-01-20: 401 Error Handling
-    [ONLY THIS SPECIFIC ENTRY - max 300 tokens]
+embedded_best_practices: [] # Dynamically injected relevant best practices.
   
 # Execution plan with configurable behaviors
 execution_plan:
-  approach: "[TECHNICAL_APPROACH]"
+  approach: "Describe the high-level technical approach to solve the problem."
   behavioral_overrides:  # Project-specific behavior customization
-    error_handling: "[PROJECT_ERROR_PATTERN]"
-    testing_approach: "[PROJECT_TEST_STRATEGY]"
-    review_process: "[PROJECT_REVIEW_STYLE]"
+    error_handling: "Standard project error handling strategy."
+    testing_approach: "Standard project testing strategy."
+    review_process: "Standard project review process."
   steps:
-    - "[DESIGN_STEP]"
-    - "[IMPLEMENT_STEP]" 
-    - "[TEST_STEP]"
-    - "[INTEGRATE_STEP]"
+    - "Outline the design phase steps."
+    - "Detail the implementation phase steps."
+    - "Describe the testing and verification steps."
+    - "Explain the integration and deployment steps."
     
 # Instructions for what to create/modify  
 what_to_do:
   files_to_modify:
-    - path: "[FILE_1]"
-      changes: "[CHANGES_1]"
-    - path: "[FILE_2]"
-      changes: "[CHANGES_2]"
+    - path: "Specify the path to the file to be modified (e.g., src/main.py)."
+      changes: "Describe the changes to be made in this file (e.g., Add new function, Refactor existing logic)."
+    - path: "Add more files as needed."
+      changes: "Describe changes for additional files."
       
 how_to_validate:
   technical:
-    - "[TECH_CHECK_1]"
-    - "[TECH_CHECK_2]"
+    - "Describe technical validation steps (e.g., Run unit tests, Check code coverage)."
+    - "Specify tools or commands for technical verification."
   functional:
-    - "[FUNC_CHECK_1]"
-    - "[FUNC_CHECK_2]"
+    - "Describe functional validation steps (e.g., Manual testing, User acceptance testing)."
+    - "Specify expected user interactions or outcomes."
     
 # Expert to review the work
 expert_review:
-  reviewer: "[PRE_ASSIGNED_SME]"
-  focus_areas: ["[AREA_1]", "[AREA_2]"]
+  reviewer: "Dynamically assigned SME (e.g., @Architect, @Security-Engineer)."
+  focus_areas: ["Technical design", "Code quality", "Security implications"]
   max_cycles: 3
   
 # MANDATORY: Git Operations Section
 # ⚠️ git_privacy: true = NO "Generated with Claude Code", NO "Co-Authored-By: Claude"
 git_operations:
-  branch_strategy: "[FROM_CONFIG]"     # Use configured branch prefixes
-  branch_protection: "[FROM_CONFIG]"  # Respect branch protection setting
-  branch_name: "[FROM_CONFIG_PREFIX]/[ID]-[DESCRIPTION]"
-  commit_format: "[ID]: [DESCRIPTION]"
-  privacy_filter: "[FROM_CONFIG]"     # Apply git_privacy if enabled - CRITICAL!
-  default_branch: "[FROM_CONFIG]"     # Target configured default branch
-  version_bump: "[PATCH|MINOR]"
+  branch_strategy: "Dynamically injected from config (e.g., 'feature/')."
+  branch_protection: "Dynamically injected from config (e.g., 'true')."
+  branch_name: "Dynamically generated (e.g., 'feature/STORY-001-implement-feature')."
+  commit_format: "Dynamically generated (e.g., 'STORY-001: Implement feature')."
+  privacy_filter: "Dynamically injected from config (e.g., 'true')."
+  default_branch: "Dynamically injected from config (e.g., 'main')."
+  version_bump: "Specify 'PATCH' for bug fixes, 'MINOR' for new features, 'MAJOR' for breaking changes."
 
 # MANDATORY: Documentation Updates Section
 documentation_updates:
   - file: "CHANGELOG.md"
-    action: "Update with PR description"
-  - file: "[FROM_CONFIG]"
-    action: "Update if affected"
+    action: "Update with a concise description of the PR's changes."
+  - file: "README.md" # Or other relevant documentation files.
+    action: "Describe updates to user-facing documentation if affected."
   
 # MANDATORY: Knowledge Management Section
 knowledge_management:
-  structure: "memory/[topic]/[subtopic].md"
-  storage: "version-controlled"
-  embedded_learnings: "pre_searched_patterns"
-  capture_patterns: "[CAPTURE_PATTERNS]"
-  capture_insights: "[CAPTURE_INSIGHTS]"
-  store_location: "memory/[topic]/[subtopic].md"
+  structure: "memory/[topic]/[subtopic].md" # Example: memory/authentication/oauth2-patterns.md
+  storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
+  embedded_learnings: "Dynamically injected relevant learnings."
+  capture_patterns: "Describe new patterns discovered during implementation."
+  capture_insights: "Summarize key insights or lessons learned."
+  store_location: "memory/[topic]/[subtopic].md" # Example: memory/authentication/oauth2-patterns.md
 
 # MANDATORY: Review Process Section
 review_process:
   type: "sme_review"
-  reviewer: "[PRE_ASSIGNED_SME]"
-  focus_areas: ["[AREA_1]", "[AREA_2]"]
+  reviewer: "Dynamically assigned _SPECIALIST_-SME based on task scope."
+  focus_areas: [] # Dynamically injected focus areas based on task scope.
   max_cycles: 3
   checklist:
     - "Configuration settings applied correctly"
@@ -158,25 +133,25 @@ documentation_management:
       entry_format: |
         ## [VERSION] - DATE
         ### Added/Fixed/Changed/Removed
-        - [MEDIUM_FEATURE_DESCRIPTION]
+        - Describe the feature, fix, or change.
       semantic_versioning: true
       mandatory: true
       
     readme:
       file: "README.md"  
-      update_required: "[YES_IF_USER_FACING_FEATURE]"
-      sections_affected: "[FEATURES/USAGE/API_IF_YES]"
-      user_impact: "[DESCRIBE_NEW_CAPABILITIES]"
+      update_required: "YES" # Set to YES if user-facing changes are made.
+      sections_affected: "List affected sections (e.g., Features, Usage, Installation)."
+      user_impact: "Describe the impact on the user (e.g., New capabilities, Changed behavior)."
       
     api_docs:
-      update_required: "[YES_IF_API_CHANGES]"
-      files_affected: "[docs/api/*.md_IF_YES]"
-      breaking_changes: "[YES/NO]"
+      update_required: "NO" # Set to YES if API changes are made.
+      files_affected: "List affected API documentation files (e.g., docs/api/auth.md)."
+      breaking_changes: "NO" # Set to YES if breaking changes are introduced.
       
   release_management:
-    github_release: "[YES_FOR_MINOR_BUMPS]"  # Create release for feature additions
-    release_notes: "[YES]"                   # Document new features
-    migration_guide: "[IF_BREAKING_CHANGES]"
+    github_release: "YES"  # Set to YES for minor version bumps (new features).
+    release_notes: "YES"   # Set to YES to document new features or significant changes.
+    migration_guide: "NO" # Set to YES if breaking changes require a migration guide.
     
   validation_checklist:
     - "CHANGELOG.md updated with feature/fix description"
@@ -188,14 +163,12 @@ documentation_management:
 # MANDATORY: Implementation Samples Section
 # ⚠️ EXECUTION CHECKLIST: All 6 sections must be completed
 implementation_samples:
-  example_commit: "[MEDIUM-001]: Implement user authentication system"
-  example_branch: "feature/MEDIUM-001-user-authentication"
+  example_commit: "Example commit message for this PRB type."
+  example_branch: "Example branch name for this PRB type."
   example_scope: |
-    Files: src/auth/, src/middleware/, src/routes/auth.js
-    - Implement JWT authentication
-    - Add middleware for route protection
-    - Create user login/logout endpoints
-    - Add password hashing utilities
+    Describe the scope of changes (e.g., Files: src/module/file.py,
+    - Add new function
+    - Refactor existing class).
 
   execution_checklist: |
     ☐ Complete Context Section - Settings, best practices, code samples loaded
@@ -211,7 +184,7 @@ implementation_samples:
 
 # Store new learnings in version control
 learning_capture:
-  patterns: "[CAPTURE_PATTERNS]"
-  insights: "[CAPTURE_INSIGHTS]"
-  store_location: "memory/[topic]/[subtopic].md"
-  version_control: true
+  patterns: "Describe new patterns discovered during implementation."
+  insights: "Summarize key insights or lessons learned."
+  store_location: "memory/[topic]/[subtopic].md" # Example: memory/authentication/oauth2-patterns.md
+  version_control: false # Knowledge in ./memory should NEVER be version controlled for this project.

@@ -12,25 +12,21 @@ title: "[ROLE] [DESCRIPTION]"
 
 # MANDATORY: Complete Context Section
 complete_context:
-  project: "[CLAUDE.md]"        # Project context from CLAUDE.md
-  settings: "[ALL-SETTINGS]"   # All configuration values
-  git_privacy: "[FROM_CONFIG]" # git_privacy setting from config
-  branch_protection: "[FROM_CONFIG]" # branch_protection from config
-  default_branch: "[FROM_CONFIG]"    # default_branch from config
-  branch_strategy: "[FROM_CONFIG]"   # branch_prefixes from config
-  scope: "[SINGLE_FILE]"
-  best_practices:
-    # Auto-discovered practices from best-practices/ directory
-    # Top 1-2 relevant practices for simple changes
-    - "[DYNAMIC_BEST_PRACTICES_1]"
-    - "[DYNAMIC_BEST_PRACTICES_2]"
+  project: "Dynamically injected project context from GEMINI.md."
+  settings: "Dynamically injected all configuration values."
+  git_privacy: "Dynamically injected git_privacy setting from config."
+  branch_protection: "Dynamically injected branch_protection from config."
+  default_branch: "Dynamically injected default_branch from config."
+  branch_strategy: "Dynamically injected branch_prefixes from config."
+  scope: "Describe the scope of the change (e.g., 'Single file modification to src/utils.js')."
+  best_practices: [] # Dynamically injected relevant best practices (minimal for simple changes).
   
 # MANDATORY: Requirements Section
 requirements:
   functional:
-    - "[WHAT_TO_CHANGE]"
-    - "[WHY_CHANGE_NEEDED]"
-    - "[EXPECTED_OUTCOME]"
+    - "Describe the specific change to be made (e.g., 'Update function signature')."
+    - "Explain why this change is needed (e.g., 'To fix a bug', 'To add a new feature')."
+    - "Specify the expected outcome after the change (e.g., 'Function returns correct value')."
   processual:
     - "Respect git_privacy setting for commit messages"
     - "Follow branch protection strategy from config"
@@ -41,41 +37,41 @@ requirements:
     - "Under 50 lines of changes"
   
 execution:
-  memory_check: "[QUICK_PATTERN_SEARCH]" # instant AI execution
+  memory_check: "Describe any quick memory pattern searches needed for instant AI execution."
   steps:
-    - "[STEP_1]"
-    - "[STEP_2]"
-    - "[STEP_3_OPTIONAL]"
+    - "Outline the first step of execution."
+    - "Detail the second step of execution."
+    - "Add optional third step if needed."
     
 validation:
-  - "[CHECK_1]"
-  - "[CHECK_2]"
+  - "Describe the first validation check."
+  - "Describe the second validation check."
 
 # MANDATORY: Git Operations Section
 # ⚠️ git_privacy: true = NO "Generated with Claude Code", NO "Co-Authored-By: Claude"
 git_operations:
-  branch_strategy: "[FROM_CONFIG]"     # Use configured branch prefixes
-  branch_protection: "[FROM_CONFIG]"  # Respect branch protection setting
-  branch_name: "[FROM_CONFIG_PREFIX]/[ID]-[DESCRIPTION]"
-  commit_format: "[ID]: [DESCRIPTION]"
-  privacy_filter: "[FROM_CONFIG]"     # Apply git_privacy if enabled - CRITICAL!
-  default_branch: "[FROM_CONFIG]"     # Target configured default branch
-  version_bump: "[NONE|PATCH]"
+  branch_strategy: "Dynamically injected from config (e.g., 'feature/')."
+  branch_protection: "Dynamically injected from config (e.g., 'true')."
+  branch_name: "Dynamically generated (e.g., 'feature/TINY-001-fix-bug')."
+  commit_format: "Dynamically generated (e.g., 'TINY-001: Fix bug')."
+  privacy_filter: "Dynamically injected from config (e.g., 'true')."
+  default_branch: "Dynamically injected from config (e.g., 'main')."
+  version_bump: "Specify 'NONE' for trivial changes, 'PATCH' for bug fixes."
 
 # MANDATORY: Documentation Updates Section
 documentation_updates:
   - file: "CHANGELOG.md"
-    action: "Update with PR description"
-  - file: "[FROM_CONFIG]"
-    action: "Update if affected"
+    action: "Update with a concise description of the PR's changes."
+  - file: "README.md" # Or other relevant documentation files.
+    action: "Describe updates to user-facing documentation if affected."
 
 # MANDATORY: Knowledge Management Section
 knowledge_management:
-  structure: "memory/[topic]/[subtopic].md"
-  storage: "version-controlled"
-  quick_search: "pattern_based_instant"
-  capture_condition: "if_novel_pattern"
-  capture_type: "implementation_approach"
+  structure: "memory/[topic]/[subtopic].md" # Example: memory/fix/bug-fix.md
+  storage: "not-version-controlled" # Knowledge in ./memory should NEVER be version controlled for this project.
+  quick_search: "Indicates if quick pattern-based search is enabled."
+  capture_condition: "Specify condition for capturing knowledge (e.g., 'if_novel_pattern')."
+  capture_type: "Specify the type of knowledge captured (e.g., 'implementation_approach')."
 
 # MANDATORY: Review Process Section
 review_process:
@@ -84,7 +80,7 @@ review_process:
     - "Configuration settings applied correctly"
     - "Single file scope maintained"
     - "Functional requirements met"
-  escalation: "if_validation_fails"
+  escalation: "Describe escalation process (e.g., 'if_validation_fails')."
 
 # MANDATORY: Documentation Management Section
 documentation_management:
@@ -93,18 +89,18 @@ documentation_management:
       file: "CHANGELOG.md"
       entry_format: |
         ### Added/Fixed/Changed
-        - [TINY_CHANGE_DESCRIPTION]
+        - Describe the tiny change (e.g., 'Fixed typo in README.md').
       semantic_versioning: true
       mandatory: true
       
     readme:
       file: "README.md"  
-      update_required: "[YES_IF_USER_FACING]"
-      sections_affected: "[LIST_IF_YES]"
+      update_required: "NO" # Set to YES if user-facing documentation is changed.
+      sections_affected: "List affected sections (e.g., 'Usage', 'Installation')."
       
   release_management:
-    github_release: "NO"     # Patch bumps don't need releases
-    release_notes: "NO"      # Simple changes documented in CHANGELOG only
+    github_release: "NO"     # Patch bumps don't need releases.
+    release_notes: "NO"      # Simple changes documented in CHANGELOG only.
     
   validation_checklist:
     - "CHANGELOG.md updated with appropriate entry"
@@ -114,17 +110,17 @@ documentation_management:
 # MANDATORY: Implementation Samples Section
 # ⚠️ EXECUTION CHECKLIST: All 6 sections must be completed
 implementation_samples:
-  example_commit: "[TINY-001]: Add input validation to user form"
-  example_branch: "feature/TINY-001-add-input-validation"
+  example_commit: "Example commit message for this PRB type."
+  example_branch: "Example branch name for this PRB type."
   example_change: |
-    File: src/components/UserForm.js
-    - Add email validation regex
-    - Add required field checks
-    - Update error messaging
+    Describe the specific change (e.g.,
+    File: src/module/file.js
+    - Add new function
+    - Update existing logic).
   
   execution_checklist: |
     ☐ Complete Context Section - Settings loaded and applied
-    ☐ Requirements Section - All functional/processual/technical requirements met
+    ☐ Requirements Section - All requirements met  
     ☐ Git Operations Section - Commands executed with privacy_filter
     ☐ Documentation Updates Section - CHANGELOG.md and affected files updated
     ☐ Knowledge Management Section - Pattern search + capture if novel
@@ -135,6 +131,7 @@ implementation_samples:
     SKIP NOTHING. EXECUTE EVERYTHING. DOCUMENT ALL CHANGES.
   
 learning_capture:
-  condition: "if_novel_pattern"
-  type: "implementation_approach"
-  storage: "memory/[topic]/[subtopic].md"
+  condition: "Specify condition for capturing knowledge (e.g., 'if_novel_pattern')."
+  type: "Specify the type of knowledge captured (e.g., 'implementation_approach')."
+  storage: "memory/[topic]/[subtopic].md" # Example: memory/fix/bug-fix.md
+  version_control: false # Knowledge in ./memory should NEVER be version controlled for this project.
