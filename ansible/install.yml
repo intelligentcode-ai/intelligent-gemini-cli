@@ -12,6 +12,8 @@
     project_root: "{{ playbook_dir }}/.."
     timestamp: "{{ ansible_date_time.iso8601_basic_short }}"
     mcp_config_path: "" # New variable, default empty
+    api_keys_file: "" # New variable, default empty
+    temp_settings_json_path: "/tmp/settings_{{ ansible_date_time.iso8601_basic_short }}.json" # New variable
     
   tasks:
     - name: Create .gemini directory structure
@@ -130,6 +132,19 @@
       when: not mcp_manifest_stat.stat.exists
       tags: [install, update]
 
+    - name: Read API keys file
+      slurp:
+        src: "{{ api_keys_file }}"
+      register: api_keys_content
+      when: api_keys_file is not none and api_keys_file != ""
+      tags: [install, update]
+
+    - name: Parse API keys
+      set_fact:
+        api_keys: "{{ api_keys_content.content | b64decode | splitlines | select('match', '.+=\s*.*\s*') | map('split', '=', 1) | map('map', 'trim') | dict }}"
+      when: api_keys_content is defined and api_keys_content.content is defined
+      tags: [install, update]
+
     - name: Read existing settings.json
       slurp:
         src: "{{ gemini_home }}/settings.json"
@@ -152,6 +167,25 @@
         current_settings: "{{ current_settings | combine({'mcpServers': current_settings.mcpServers | combine({item.key: item.value})}) }}"
       loop: "{{ mcp_manifest.mcpServers | dict2items }}"
       when: item.key not in current_settings.mcpServers
+      tags: [install, update]
+
+    - name: Perform API key substitution in settings.json content
+      set_fact:
+        current_settings_str: "{{ current_settings | to_json }}"
+      when: api_keys is defined and api_keys | length > 0
+      tags: [install, update]
+
+    - name: Replace API key placeholders
+      set_fact:
+        current_settings_str: "{{ current_settings_str | regex_replace('\$\{' + item.key + '\}', item.value) }}"
+      loop: "{{ api_keys | dict2items }}"
+      when: api_keys is defined and api_keys | length > 0
+      tags: [install, update]
+
+    - name: Convert modified settings string back to JSON
+      set_fact:
+        current_settings: "{{ current_settings_str | from_json }}"
+      when: api_keys is defined and api_keys | length > 0
       tags: [install, update]
 
     - name: Write updated settings.json
