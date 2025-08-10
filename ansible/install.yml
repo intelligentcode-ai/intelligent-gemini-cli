@@ -104,6 +104,48 @@
       when: not settings_json_stat.stat.exists
       tags: [install]
 
+    - name: Read MCP manifest
+      slurp:
+        src: "{{ project_root }}/mcp-manifest.json"
+      register: mcp_manifest_content
+      tags: [install, update]
+
+    - name: Parse MCP manifest JSON
+      set_fact:
+        mcp_manifest: "{{ mcp_manifest_content.content | b64decode | from_json }}"
+      tags: [install, update]
+
+    - name: Read existing settings.json
+      slurp:
+        src: "{{ gemini_home }}/settings.json"
+      register: settings_json_content
+      tags: [install, update]
+
+    - name: Parse settings.json JSON
+      set_fact:
+        current_settings: "{{ settings_json_content.content | b64decode | from_json }}"
+      tags: [install, update]
+
+    - name: Ensure mcpServers block exists in settings.json
+      set_fact:
+        current_settings: "{{ current_settings | combine({'mcpServers': {}}) }}"
+      when: current_settings.mcpServers is not defined
+      tags: [install, update]
+
+    - name: Add or update MCPs in settings.json
+      set_fact:
+        current_settings: "{{ current_settings | combine({'mcpServers': current_settings.mcpServers | combine({item.key: item.value})}) }}"
+      loop: "{{ mcp_manifest.mcpServers | dict2items }}"
+      when: item.key not in current_settings.mcpServers
+      tags: [install, update]
+
+    - name: Write updated settings.json
+      copy:
+        content: "{{ current_settings | to_nice_json }}"
+        dest: "{{ gemini_home }}/settings.json"
+        mode: '0644'
+      tags: [install, update]
+
     - name: Copy system configuration
       copy:
         src: "{{ project_root }}/src/config.md"
