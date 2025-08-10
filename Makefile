@@ -29,7 +29,7 @@ check-prereqs:
 # Install system
 install: check-prereqs
 	@echo "Installing Intelligent Gemini CLI..."
-	@ansible-playbook ansible/install.yml $(if $(VERBOSE),-vv,)
+	@ansible-playbook ansible/install.yml $(if $(VERBOSE),-vv,) $(if $(MCP_CONFIG_PATH),-e mcp_config_path=$(MCP_CONFIG_PATH),)
 	@echo "✅ Installation complete!"
 	@echo ""
 	@echo "Next steps:"

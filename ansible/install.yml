@@ -11,6 +11,7 @@
     gemini_home: "{{ ansible_env.HOME }}/.gemini"
     project_root: "{{ playbook_dir }}/.."
     timestamp: "{{ ansible_date_time.iso8601_basic_short }}"
+    mcp_config_path: "" # New variable, default empty
     
   tasks:
     - name: Create .gemini directory structure
@@ -104,15 +105,15 @@
       when: not settings_json_stat.stat.exists
       tags: [install]
 
-    - name: Check for mcp-manifest.json
+    - name: Check for MCP manifest file
       stat:
-        path: "{{ project_root }}/mcp-manifest.json"
+        path: "{{ mcp_config_path if mcp_config_path else project_root + '/mcp-manifest.json' }}"
       register: mcp_manifest_stat
       tags: [install, update]
 
     - name: Read MCP manifest
       slurp:
-        src: "{{ project_root }}/mcp-manifest.json"
+        src: "{{ mcp_config_path if mcp_config_path else project_root + '/mcp-manifest.json' }}"
       register: mcp_manifest_content
       when: mcp_manifest_stat.stat.exists
       tags: [install, update]
