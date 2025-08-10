@@ -39,30 +39,7 @@ MCP server configurations are defined under the `mcpServers` key in your `settin
 
 ## Example Configuration
 
-Here's an example of how to configure an MCP server in your `settings.json` (or `config.md`):
-
-```json
-{
-  "mcpServers": {
-    "myCodeGenerator": {
-      "command": "/usr/local/bin/my-code-gen-server",
-      "args": ["--model", "gpt-4", "--temp", "0.7"],
-      "env": {
-        "API_KEY": "$OPENAI_API_KEY"
-      },
-      "cwd": "/opt/code-gen-server",
-      "timeout": 60000,
-      "trust": true
-    },
-    "localPromptProcessor": {
-      "command": "./scripts/local_processor.py",
-      "args": ["--verbose"],
-      "cwd": "./",
-      "timeout": 10000
-    }
-  }
-}
-```
+A sample MCP server configuration is available in `mcp-server-config-sample.json` in the project's root directory.
 
 ## Auto-Installation of MCPs
 
